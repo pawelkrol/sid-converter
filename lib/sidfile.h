@@ -1,0 +1,4 @@
+class SidFile {
+
+  char* filename;
+};
