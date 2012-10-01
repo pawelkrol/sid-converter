@@ -1,1 +1,3 @@
 CC=g++
+
+TEST_EXEC_FILENAME=test-runner

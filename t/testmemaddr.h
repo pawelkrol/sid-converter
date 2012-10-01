@@ -1,6 +1,11 @@
+#ifndef TestMemAddr_h
+#define TestMemAddr_h
+
 #include "memaddr.h"
 
+#include <TestCaller.h>
 #include <TestCase.h>
+#include <TestSuite.h>
 
 class MemoryAddressTest : public CppUnit::TestFixture {
 
@@ -12,4 +17,8 @@ class MemoryAddressTest : public CppUnit::TestFixture {
     void tearDown();
 
     void testDummy();
+
+    static CppUnit::Test *suite();
 };
+
+#endif // TestMemAddr_h

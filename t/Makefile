@@ -6,14 +6,18 @@ LIBS=-lcppunit
 
 clean:
 	rm -f *.o
-	rm -f tests
+	rm -f $(TEST_EXEC_FILENAME)
 
-SOURCES := t.cpp testmemaddr.cpp
+SOURCES := testrunner.cpp testmemaddr.cpp
 
 OBJS := $(SOURCES:.cpp=.o)
 
-test: $(OBJS)
-	$(CC) $(CFLAGS) -o tests $(OBJS) $(LFLAGS) $(LIBS)
+test-compile: $(OBJS)
+	$(CC) $(CFLAGS) -o $(TEST_EXEC_FILENAME) $(OBJS) $(LFLAGS) $(LIBS)
+	chmod u+x $(TEST_EXEC_FILENAME)
+
+test: test-compile
+	./$(TEST_EXEC_FILENAME)
 
 .cpp.o:
 	$(CC) $(CFLAGS) $(INCLUDES) -c $<

@@ -11,5 +11,16 @@ void MemoryAddressTest :: tearDown() {
 }
 
 void MemoryAddressTest :: testDummy() {
-  CPPUNIT_ASSERT(1 == 0);
+  CPPUNIT_ASSERT(1 == 1);
+}
+
+CppUnit::Test *MemoryAddressTest :: suite() {
+  CppUnit::TestSuite *suiteOfTests = new CppUnit::TestSuite("MemoryAddressTest");
+
+  suiteOfTests->addTest(new CppUnit::TestCaller<MemoryAddressTest>(
+    "testDummy",
+    &MemoryAddressTest::testDummy
+  ));
+
+  return suiteOfTests;
 }
