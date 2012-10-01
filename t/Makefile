@@ -12,6 +12,8 @@ SOURCES := testrunner.cpp testmemaddr.cpp
 
 OBJS := $(SOURCES:.cpp=.o)
 
+LIBS += ../lib/memaddr.o
+
 test-compile: $(OBJS)
 	$(CC) $(CFLAGS) -o $(TEST_EXEC_FILENAME) $(OBJS) $(LFLAGS) $(LIBS)
 	chmod u+x $(TEST_EXEC_FILENAME)

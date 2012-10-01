@@ -10,13 +10,15 @@
 class MemoryAddressTest : public CppUnit::TestFixture {
 
   private:
-    MemoryAddress *memaddr_01, *memaddr_02;
+    MemoryAddress *memaddr_0000_01, *memaddr_0000_02;
+    MemoryAddress *memaddr_1000_01, *memaddr_1000_02;
 
   public:
     void setUp();
     void tearDown();
 
-    void testDummy();
+    void testEquality();
+    void testAddressValue();
 
     static CppUnit::Test *suite();
 };
