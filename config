@@ -1,3 +1,4 @@
 CC=g++
+# DEBUG_OPTS=-g
 
 TEST_EXEC_FILENAME=test-runner

@@ -10,6 +10,8 @@ void MemoryAddressTest :: setUp() {
 void MemoryAddressTest :: tearDown() {
   delete memaddr_0000_01;
   delete memaddr_0000_02;
+  delete memaddr_1000_01;
+  delete memaddr_1000_02;
 }
 
 void MemoryAddressTest :: testEquality() {
@@ -18,10 +20,10 @@ void MemoryAddressTest :: testEquality() {
 }
 
 void MemoryAddressTest :: testAddressValue() {
-  addr memaddr;
+  addr memaddr = 0x1000;
 
-  CPPUNIT_ASSERT(memaddr_1000_01->memaddr() == 0x1000);
-  CPPUNIT_ASSERT(memaddr_1000_02->memaddr() == 0x1000);
+  CPPUNIT_ASSERT(memaddr_1000_01->memaddr() == memaddr);
+  CPPUNIT_ASSERT(memaddr_1000_02->memaddr() == memaddr);
 }
 
 CppUnit::Test *MemoryAddressTest :: suite() {

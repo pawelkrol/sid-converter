@@ -8,14 +8,14 @@ clean:
 	rm -f *.o
 	rm -f $(TEST_EXEC_FILENAME)
 
-SOURCES := testrunner.cpp testmemaddr.cpp
+SOURCES := testrunner.cpp testmemaddr.cpp testsidheader.cpp testutils.cpp
 
 OBJS := $(SOURCES:.cpp=.o)
 
-LIBS += ../lib/memaddr.o
+LIBS += ../lib/memaddr.o ../lib/sidheader.o ../lib/sidheaderv2.o
 
 test-compile: $(OBJS)
-	$(CC) $(CFLAGS) -o $(TEST_EXEC_FILENAME) $(OBJS) $(LFLAGS) $(LIBS)
+	$(CC) $(DEBUG_OPTS) $(CFLAGS) -o $(TEST_EXEC_FILENAME) $(OBJS) $(LFLAGS) $(LIBS)
 	chmod u+x $(TEST_EXEC_FILENAME)
 
 test: test-compile

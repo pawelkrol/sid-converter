@@ -1,6 +1,6 @@
 include ../config
 
-SOURCES := memaddr.cpp siddata.cpp sidfile.cpp
+SOURCES := memaddr.cpp siddata.cpp sidheader.cpp sidheaderv2.cpp sidfile.cpp
 
 OBJS := $(SOURCES:.cpp=.o)
 

@@ -3,7 +3,8 @@
 
 class SidFile {
 
-  char* filename;
+  private:
+    char* filename;
 };
 
 #endif // SidFile_h

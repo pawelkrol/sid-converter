@@ -4,9 +4,6 @@
 #include "memaddr.h"
 
 class SidData {
-
-  MemoryAddress initAddr;
-  MemoryAddress playAddr;
 };
 
 #endif // SidData_h
