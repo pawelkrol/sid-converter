@@ -1,7 +1,11 @@
 #ifndef TestSidString_h
 #define TestSidString_h
 
+#include <string.h>
+
 #include "sidstring.h"
+
+#include "testutils.h"
 
 #include <TestCaller.h>
 #include <TestCase.h>
@@ -20,6 +24,8 @@ class SidStringTest : public CppUnit::TestFixture {
 
     void testGetLength();
     void testSetString();
+
+    void testGetBytes();
 
     void testSetTooLongString();
 

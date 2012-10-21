@@ -52,10 +52,9 @@ class SidHeader {
     SidString copyright; // offset: 0x56
 
     /*** TODO: implementation missing! ***/
-    /*** TODO: add missing properties! ***/
-
-    MemoryAddress initAddr;
-    MemoryAddress playAddr;
+    // Use dedicated classes to store memory address data:
+    // MemoryAddress initAddr;
+    // MemoryAddress playAddr;
 
   public:
     SidHeader();
@@ -66,27 +65,36 @@ class SidHeader {
     const byte *getMagicID() const;
 
     const byte *getVersion() const;
-    const short int getVersionNum() const; // TODO: use with caution, method name might change in the future!
+    const short int getVersionNum() const;
 
     const byte *getDataOffset() const;
-    const short int getDataOffsetNum() const; // TODO: use with caution, method name might change in the future!
+    const short int getDataOffsetNum() const;
 
     const byte *getLoadAddress() const;
-    const short int getLoadAddressNum() const; // TODO: use with caution, method name might change in the future!
+    const short int getLoadAddressNum() const;
 
     const byte *getInitAddress() const;
-    const short int getInitAddressNum() const; // TODO: use with caution, method name might change in the future!
+    const short int getInitAddressNum() const;
 
     const byte *getPlayAddress() const;
-    const short int getPlayAddressNum() const; // TODO: use with caution, method name might change in the future!
+    const short int getPlayAddressNum() const;
 
     const byte *getSongs() const;
-    const short int getSongsNum() const; // TODO: use with caution, method name might change in the future!
+    const short int getSongsNum() const;
 
     const byte *getStartSong() const;
-    const short int getStartSongNum() const; // TODO: use with caution, method name might change in the future!
+    const short int getStartSongNum() const;
 
     const byte *getSpeed() const;
+
+    const byte *getTitle() const;
+    const char *getTitleString() const;
+
+    const byte *getAuthor() const;
+    const char *getAuthorString() const;
+
+    const byte *getCopyright() const;
+    const char *getCopyrightString() const;
 
     const char *dataDump() const;
 

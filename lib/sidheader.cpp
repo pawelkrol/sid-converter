@@ -35,6 +35,7 @@ SidHeader :: SidHeader() {
 
 const byte *SidHeader :: getCommon() const {
   byte *bytes = new byte[HEADER_COMMON_SIZE];
+
   memcpy(bytes + MAGICID_OFFSET, magicID, MAGICID_SIZE);
   memcpy(bytes + VERSION_OFFSET, version, VERSION_SIZE);
   memcpy(bytes + DATA_OFFSET_OFFSET, dataOffset, DATA_OFFSET_SIZE);
@@ -44,11 +45,19 @@ const byte *SidHeader :: getCommon() const {
   memcpy(bytes + SONGS_OFFSET, songs, SONGS_SIZE);
   memcpy(bytes + START_SONG_OFFSET, startSong, START_SONG_SIZE);
   memcpy(bytes + SPEED_OFFSET, speed, SPEED_SIZE);
-  /*** TODO: implementation missing! ***/
-  /*** TODO: add missing components! ***/
-  //  * title
-  //  * author
-  //  * copyright
+
+  const byte *titleBytes = title.getBytes();
+  memcpy(bytes + TITLE_OFFSET, titleBytes, TITLE_SIZE);
+  delete titleBytes;
+
+  const byte *authorBytes = author.getBytes();
+  memcpy(bytes + AUTHOR_OFFSET, authorBytes, AUTHOR_SIZE);
+  delete authorBytes;
+
+  const byte *copyrightBytes = copyright.getBytes();
+  memcpy(bytes + COPYRIGHT_OFFSET, copyrightBytes, COPYRIGHT_SIZE);
+  delete copyrightBytes;
+
   return bytes;
 }
 
@@ -116,6 +125,30 @@ const short int SidHeader :: getStartSongNum() const {
 
 const byte *SidHeader :: getSpeed() const {
   getSidHeaderValue(speed, SPEED_SIZE)
+}
+
+const byte *SidHeader :: getTitle() const {
+  return title.getBytes();
+}
+
+const char *SidHeader :: getTitleString() const {
+  return title.getString();
+}
+
+const byte *SidHeader :: getAuthor() const {
+  return author.getBytes();
+}
+
+const char *SidHeader :: getAuthorString() const {
+  return author.getString();
+}
+
+const byte *SidHeader :: getCopyright() const {
+  return copyright.getBytes();
+}
+
+const char *SidHeader :: getCopyrightString() const {
+  return copyright.getString();
 }
 
 const char *SidHeader :: dataDump() const {

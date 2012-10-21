@@ -1,7 +1,4 @@
-#include "string.h"
-
 #include "testsidheader.h"
-#include "testutils.h"
 
 void SidHeaderTest :: setUp() {
   sidheader_01 = new SidHeaderV2();
@@ -19,8 +16,8 @@ void SidHeaderTest :: testEquality() {
 }
 
 void SidHeaderTest :: testMagicIDInitialization() {
-  const byte *magicID            = sidheader_01->getMagicID();
-  const byte expectedMagicID [4] = { 0x50, 0x53, 0x49, 0x44 };
+  const byte *magicID = sidheader_01->getMagicID();
+  const byte expectedMagicID [MAGICID_SIZE] = { 0x50, 0x53, 0x49, 0x44 };
 
   CPPUNIT_ASSERT(TestUtils::compare(magicID, expectedMagicID, MAGICID_SIZE) == 0);
 
@@ -28,8 +25,8 @@ void SidHeaderTest :: testMagicIDInitialization() {
 }
 
 void SidHeaderTest :: testVersionInitialization() {
-  const byte *version            = sidheader_01->getVersion();
-  const byte expectedVersion [2] = { 0x00, 0x02 };
+  const byte *version = sidheader_01->getVersion();
+  const byte expectedVersion [VERSION_SIZE] = { 0x00, 0x02 };
 
   CPPUNIT_ASSERT(TestUtils::compare(version, expectedVersion, VERSION_SIZE) == 0);
 
@@ -40,8 +37,8 @@ void SidHeaderTest :: testVersionInitialization() {
 }
 
 void SidHeaderTest :: testDataOffsetInitialization() {
-  const byte *dataOffset            = sidheader_01->getDataOffset();
-  const byte expectedDataOffset [2] = { 0x00, 0x7c };
+  const byte *dataOffset = sidheader_01->getDataOffset();
+  const byte expectedDataOffset [DATA_OFFSET_SIZE] = { 0x00, 0x7c };
 
   CPPUNIT_ASSERT(TestUtils::compare(dataOffset, expectedDataOffset, DATA_OFFSET_SIZE) == 0);
 
@@ -52,8 +49,8 @@ void SidHeaderTest :: testDataOffsetInitialization() {
 }
 
 void SidHeaderTest :: testLoadAddressInitialization() {
-  const byte *loadAddress            = sidheader_01->getLoadAddress();
-  const byte expectedLoadAddress [2] = { 0x00, 0x00 };
+  const byte *loadAddress = sidheader_01->getLoadAddress();
+  const byte expectedLoadAddress [LOAD_ADDRESS_SIZE] = { 0x00, 0x00 };
 
   CPPUNIT_ASSERT(TestUtils::compare(loadAddress, expectedLoadAddress, LOAD_ADDRESS_SIZE) == 0);
 
@@ -64,8 +61,8 @@ void SidHeaderTest :: testLoadAddressInitialization() {
 }
 
 void SidHeaderTest :: testInitAddressInitialization() {
-  const byte *initAddress            = sidheader_01->getInitAddress();
-  const byte expectedInitAddress [2] = { 0x10, 0x00 };
+  const byte *initAddress = sidheader_01->getInitAddress();
+  const byte expectedInitAddress [INIT_ADDRESS_SIZE] = { 0x10, 0x00 };
 
   CPPUNIT_ASSERT(TestUtils::compare(initAddress, expectedInitAddress, INIT_ADDRESS_SIZE) == 0);
 
@@ -76,8 +73,8 @@ void SidHeaderTest :: testInitAddressInitialization() {
 }
 
 void SidHeaderTest :: testPlayAddressInitialization() {
-  const byte *playAddress            = sidheader_01->getPlayAddress();
-  const byte expectedPlayAddress [2] = { 0x10, 0x03 };
+  const byte *playAddress = sidheader_01->getPlayAddress();
+  const byte expectedPlayAddress [PLAY_ADDRESS_SIZE] = { 0x10, 0x03 };
 
   CPPUNIT_ASSERT(TestUtils::compare(playAddress, expectedPlayAddress, PLAY_ADDRESS_SIZE) == 0);
 
@@ -88,8 +85,8 @@ void SidHeaderTest :: testPlayAddressInitialization() {
 }
 
 void SidHeaderTest :: testSongsInitialization() {
-  const byte *songs            = sidheader_01->getSongs();
-  const byte expectedSongs [2] = { 0x00, 0x01 };
+  const byte *songs = sidheader_01->getSongs();
+  const byte expectedSongs [SONGS_SIZE] = { 0x00, 0x01 };
 
   CPPUNIT_ASSERT(TestUtils::compare(songs, expectedSongs, SONGS_SIZE) == 0);
 
@@ -100,8 +97,8 @@ void SidHeaderTest :: testSongsInitialization() {
 }
 
 void SidHeaderTest :: testStartSongInitialization() {
-  const byte *startSong            = sidheader_01->getStartSong();
-  const byte expectedStartSong [2] = { 0x00, 0x01 };
+  const byte *startSong = sidheader_01->getStartSong();
+  const byte expectedStartSong [START_SONG_SIZE] = { 0x00, 0x01 };
 
   CPPUNIT_ASSERT(TestUtils::compare(startSong, expectedStartSong, START_SONG_SIZE) == 0);
 
@@ -112,17 +109,53 @@ void SidHeaderTest :: testStartSongInitialization() {
 }
 
 void SidHeaderTest :: testSpeedInitialization() {
-  const byte *speed            = sidheader_01->getSpeed();
-  const byte expectedSpeed [4] = { 0x00, 0x00, 0x00, 0x00 };
+  const byte *speed = sidheader_01->getSpeed();
+  const byte expectedSpeed [SPEED_SIZE] = { 0x00, 0x00, 0x00, 0x00 };
 
   CPPUNIT_ASSERT(TestUtils::compare(speed, expectedSpeed, SPEED_SIZE) == 0);
 
   delete speed;
 }
 
+void SidHeaderTest :: testTitleInitialization() {
+  const byte *title = sidheader_01->getTitle();
+  const byte expectedTitle [TITLE_SIZE] = {
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+  };
+
+  CPPUNIT_ASSERT(TestUtils::compare(title, expectedTitle, TITLE_SIZE) == 0);
+
+  delete title;
+}
+
+void SidHeaderTest :: testAuthorInitialization() {
+  const byte *author = sidheader_01->getAuthor();
+  const byte expectedAuthor [AUTHOR_SIZE] = {
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+  };
+
+  CPPUNIT_ASSERT(TestUtils::compare(author, expectedAuthor, AUTHOR_SIZE) == 0);
+
+  delete author;
+}
+
+void SidHeaderTest :: testCopyrightInitialization() {
+  const byte *copyright = sidheader_01->getCopyright();
+  const byte expectedCopyright [COPYRIGHT_SIZE] = {
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+  };
+
+  CPPUNIT_ASSERT(TestUtils::compare(copyright, expectedCopyright, COPYRIGHT_SIZE) == 0);
+
+  delete copyright;
+}
+
 void SidHeaderTest :: testFlagsInitialization() {
-  const byte *flags            = sidheader_01->getFlags();
-  const byte expectedFlags [2] = { 0x00, 0x24 };
+  const byte *flags = sidheader_01->getFlags();
+  const byte expectedFlags [FLAGS_SIZE] = { 0x00, 0x24 };
 
   CPPUNIT_ASSERT(TestUtils::compare(flags, expectedFlags, FLAGS_SIZE) == 0);
 
@@ -131,7 +164,7 @@ void SidHeaderTest :: testFlagsInitialization() {
 
 void SidHeaderTest :: testEmptyInitialization() {
   const byte *header               = sidheader_01->get();
-  const byte expectedHeader [0x7c] = {
+  const byte expectedHeader [HEADER_V2_SIZE] = {
     0x50, 0x53, 0x49, 0x44, 0x00, 0x02, 0x00, 0x7c, 0x00, 0x00, 0x10, 0x00, 0x10, 0x03, 0x00, 0x01,
     0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -198,6 +231,21 @@ CppUnit::Test *SidHeaderTest :: suite() {
   suiteOfTests->addTest(new CppUnit::TestCaller<SidHeaderTest>(
     "testSpeedInitialization",
     &SidHeaderTest::testSpeedInitialization
+  ));
+
+  suiteOfTests->addTest(new CppUnit::TestCaller<SidHeaderTest>(
+    "testTitleInitialization",
+    &SidHeaderTest::testTitleInitialization
+  ));
+
+  suiteOfTests->addTest(new CppUnit::TestCaller<SidHeaderTest>(
+    "testAuthorInitialization",
+    &SidHeaderTest::testAuthorInitialization
+  ));
+
+  suiteOfTests->addTest(new CppUnit::TestCaller<SidHeaderTest>(
+    "testCopyrightInitialization",
+    &SidHeaderTest::testCopyrightInitialization
   ));
 
   suiteOfTests->addTest(new CppUnit::TestCaller<SidHeaderTest>(

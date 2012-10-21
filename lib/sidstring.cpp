@@ -56,7 +56,7 @@ const char *SidString :: getString() const {
   }
 
   char *str = new char [++i];
-  strncpy(str, buffer, i);
+  strncpy (str, buffer, i);
 
   return str;
 }
@@ -74,4 +74,10 @@ void SidString :: setString(const char *str) {
   }
 
   data[i] = 0x00;
+}
+
+const byte *SidString :: getBytes() const {
+  byte *bytes = new byte [SID_STRING_SIZE];
+  memcpy (bytes, data, SID_STRING_SIZE);
+  return bytes;
 }

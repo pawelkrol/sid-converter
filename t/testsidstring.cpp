@@ -30,6 +30,19 @@ void SidStringTest :: testSetString() {
   delete string;
 }
 
+void SidStringTest :: testGetBytes() {
+  sidstring_01->setString("SID");
+  const byte *bytes = sidstring_01->getBytes();
+  const byte expectedBytes [SID_STRING_SIZE] = {
+    0x53, 0x49, 0x44, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+  };
+
+  CPPUNIT_ASSERT(TestUtils::compare(bytes, expectedBytes, SID_STRING_SIZE) == 0);
+
+  delete bytes;
+}
+
 void SidStringTest :: testSetTooLongString() {
   sidstring_01->setString("1234567890123456789012345678901234567890");
   const char *string = sidstring_01->getString();
@@ -63,6 +76,11 @@ CppUnit::Test *SidStringTest :: suite() {
   suiteOfTests->addTest(new CppUnit::TestCaller<SidStringTest>(
     "testSetString",
     &SidStringTest::testSetString
+  ));
+
+  suiteOfTests->addTest(new CppUnit::TestCaller<SidStringTest>(
+    "testGetBytes",
+    &SidStringTest::testGetBytes
   ));
 
   suiteOfTests->addTest(new CppUnit::TestCaller<SidStringTest>(

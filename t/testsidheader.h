@@ -1,8 +1,12 @@
 #ifndef TestSidHeader_h
 #define TestSidHeader_h
 
+#include <string.h>
+
 #include "constants.h"
 #include "sidheaderv2.h"
+
+#include "testutils.h"
 
 #include <TestCaller.h>
 #include <TestCase.h>
@@ -28,10 +32,9 @@ class SidHeaderTest : public CppUnit::TestFixture {
     void testSongsInitialization();
     void testStartSongInitialization();
     void testSpeedInitialization();
-    // TODO: add tests for other fields...
-    //  * title
-    //  * author
-    //  * copyright
+    void testTitleInitialization();
+    void testAuthorInitialization();
+    void testCopyrightInitialization();
     void testFlagsInitialization();
     // TODO: add tests for other fields...
     //  * startPage
