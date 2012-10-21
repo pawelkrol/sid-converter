@@ -11,7 +11,6 @@
 #define PAGE_LENGTH_OFFSET 0x79
 #define RESERVED_OFFSET 0x7a
 
-#define FLAGS_SIZE 0x02
 #define START_PAGE_SIZE 0x01
 #define PAGE_LENGTH_SIZE 0x01
 #define RESERVED_SIZE 0x02
@@ -34,8 +33,13 @@ class SidHeaderV2 : public SidHeader {
 
     const byte *get() const;
 
+    const byte *getFlags() const;
+
     /*** TODO: implementation missing! ***/
     // TODO: add missing accessor/setter methods...
+    //  * startPage
+    //  * pageLength
+    //  * reserved
     /*** TODO: implementation missing! ***/
 
     const short int size() const;

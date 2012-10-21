@@ -120,10 +120,16 @@ void SidHeaderTest :: testSpeedInitialization() {
   delete speed;
 }
 
-void SidHeaderTest :: testEmptyInitialization() {
-  /*** TODO: implementation missing! ***/
-  /*** TODO: add individual tests for all other header fields! ***/
+void SidHeaderTest :: testFlagsInitialization() {
+  const byte *flags            = sidheader_01->getFlags();
+  const byte expectedFlags [2] = { 0x00, 0x24 };
 
+  CPPUNIT_ASSERT(TestUtils::compare(flags, expectedFlags, FLAGS_SIZE) == 0);
+
+  delete flags;
+}
+
+void SidHeaderTest :: testEmptyInitialization() {
   const byte *header               = sidheader_01->get();
   const byte expectedHeader [0x7c] = {
     0x50, 0x53, 0x49, 0x44, 0x00, 0x02, 0x00, 0x7c, 0x00, 0x00, 0x10, 0x00, 0x10, 0x03, 0x00, 0x01,
@@ -192,6 +198,11 @@ CppUnit::Test *SidHeaderTest :: suite() {
   suiteOfTests->addTest(new CppUnit::TestCaller<SidHeaderTest>(
     "testSpeedInitialization",
     &SidHeaderTest::testSpeedInitialization
+  ));
+
+  suiteOfTests->addTest(new CppUnit::TestCaller<SidHeaderTest>(
+    "testFlagsInitialization",
+    &SidHeaderTest::testFlagsInitialization
   ));
 
   suiteOfTests->addTest(new CppUnit::TestCaller<SidHeaderTest>(

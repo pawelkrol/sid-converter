@@ -28,6 +28,18 @@ class SidHeaderTest : public CppUnit::TestFixture {
     void testSongsInitialization();
     void testStartSongInitialization();
     void testSpeedInitialization();
+    // TODO: add tests for other fields...
+    //  * title
+    //  * author
+    //  * copyright
+    void testFlagsInitialization();
+    // TODO: add tests for other fields...
+    //  * startPage
+    //  * pageLength
+    //  * reserved
+
+    // TODO: add tests for all set methods...
+    // TODO: add tests for exceptions on invalid set values...
 
     void testEmptyInitialization();
 

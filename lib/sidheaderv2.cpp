@@ -42,18 +42,25 @@ SidHeaderV2 :: SidHeaderV2() {
 
 const byte *SidHeaderV2 :: get() const {
   byte *bytes = new byte[HEADER_V2_SIZE];
+
   const byte *commonBytes = getCommon();
   memcpy(bytes, commonBytes, HEADER_COMMON_SIZE);
   delete commonBytes;
+
+  const byte *flagsBytes = getFlags();
+  memcpy(bytes + FLAGS_OFFSET, flagsBytes, FLAGS_SIZE);
+  delete flagsBytes;
+
   memcpy(bytes + START_PAGE_OFFSET, startPage, START_PAGE_SIZE);
   memcpy(bytes + PAGE_LENGTH_OFFSET, pageLength, PAGE_LENGTH_SIZE);
   memcpy(bytes + RESERVED_OFFSET, reserved, RESERVED_SIZE);
-  /*** TODO: implementation missing! ***/
-bytes[HEADER_COMMON_SIZE] = 0xff;
-bytes[HEADER_COMMON_SIZE + 1] = 0xee;
-  /*** TODO: add missing version 2 specific components! ***/
-  /*** TODO: implementation missing! ***/
+
   return bytes;
+}
+
+const byte *SidHeaderV2 :: getFlags() const {
+  const byte *flagsBytes = flags.get();
+  return flagsBytes;
 }
 
 const short int SidHeaderV2 :: size() const {

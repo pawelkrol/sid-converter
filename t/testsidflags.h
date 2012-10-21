@@ -25,6 +25,11 @@ class SidFlagsTest : public CppUnit::TestFixture {
 
     void testBinaryDataFormatInitialization();
     void testPlaySIDSpecificInitialization();
+    void testVideoStandardInitialization();
+    void testSIDVersionInitialization();
+
+    // TODO: add tests for all set methods...
+    // TODO: add tests for exceptions on invalid set values...
 
     void testEmptyInitialization();
 

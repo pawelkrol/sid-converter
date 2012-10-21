@@ -4,7 +4,7 @@ SidHeader :: SidHeader() {
   byte _magicID [MAGICID_SIZE] = { 0x50, 0x53, 0x49, 0x44 };
   memcpy(magicID, _magicID, MAGICID_SIZE);
 
-  byte _version [VERSION_SIZE] = { 0x00, 0x02 };
+  byte _version [VERSION_SIZE] = { 0x00, 0x01 };
   memcpy(version, _version, VERSION_SIZE);
 
   byte _dataOffset [DATA_OFFSET_SIZE] = { 0x00, 0x7c };
@@ -46,6 +46,9 @@ const byte *SidHeader :: getCommon() const {
   memcpy(bytes + SPEED_OFFSET, speed, SPEED_SIZE);
   /*** TODO: implementation missing! ***/
   /*** TODO: add missing components! ***/
+  //  * title
+  //  * author
+  //  * copyright
   return bytes;
 }
 
@@ -112,9 +115,7 @@ const short int SidHeader :: getStartSongNum() const {
 }
 
 const byte *SidHeader :: getSpeed() const {
-  byte *_speed = new byte[SPEED_SIZE];
-  memcpy(_speed, speed, SPEED_SIZE);
-  return _speed;
+  getSidHeaderValue(speed, SPEED_SIZE)
 }
 
 const char *SidHeader :: dataDump() const {

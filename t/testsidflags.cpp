@@ -16,17 +16,31 @@ void SidFlagsTest :: testEquality() {
 }
 
 void SidFlagsTest :: testBinaryDataFormatInitialization() {
-  const BinaryDataFormatType binaryDataFormat         = sidflags_01->getBinaryDataFormat();
-  const BinaryDataFormatType expectedBinaryDataFormat = BUILT_IN_MUSIC_PLAYER;
+  const BinaryDataFormat musPlayer         = sidflags_01->getMusPlayer();
+  const BinaryDataFormat expectedMusPlayer = PLAYER_BUILT_IN_MUSIC_PLAYER;
 
-  CPPUNIT_ASSERT(binaryDataFormat == expectedBinaryDataFormat);
+  CPPUNIT_ASSERT(musPlayer == expectedMusPlayer);
 }
 
 void SidFlagsTest :: testPlaySIDSpecificInitialization() {
-  const PlaySIDSpecificType playSIDSpecific         = sidflags_01->getPlaySIDSpecific();
-  const PlaySIDSpecificType expectedPlaySIDSpecific = C64_COMPATIBLE;
+  const PlaySIDSpecific psidSpecific         = sidflags_01->getPsidSpecific();
+  const PlaySIDSpecific expectedPsidSpecific = PSID_C64_COMPATIBLE;
 
-  CPPUNIT_ASSERT(playSIDSpecific == expectedPlaySIDSpecific);
+  CPPUNIT_ASSERT(psidSpecific == expectedPsidSpecific);
+}
+
+void SidFlagsTest :: testVideoStandardInitialization() {
+  const VideoStandard clock         = sidflags_01->getClock();
+  const VideoStandard expectedClock = CLOCK_PAL;
+
+  CPPUNIT_ASSERT(clock == expectedClock);
+}
+
+void SidFlagsTest :: testSIDVersionInitialization() {
+  const SIDVersion sidModel         = sidflags_01->getSidModel();
+  const SIDVersion expectedSidModel = SID_MOS8580;
+
+  CPPUNIT_ASSERT(sidModel == expectedSidModel);
 }
 
 void SidFlagsTest :: testEmptyInitialization() {
@@ -54,6 +68,16 @@ CppUnit::Test *SidFlagsTest :: suite() {
   suiteOfTests->addTest(new CppUnit::TestCaller<SidFlagsTest>(
     "testPlaySIDSpecificInitialization",
     &SidFlagsTest::testPlaySIDSpecificInitialization
+  ));
+
+  suiteOfTests->addTest(new CppUnit::TestCaller<SidFlagsTest>(
+    "testVideoStandardInitialization",
+    &SidFlagsTest::testVideoStandardInitialization
+  ));
+
+  suiteOfTests->addTest(new CppUnit::TestCaller<SidFlagsTest>(
+    "testSIDVersionInitialization",
+    &SidFlagsTest::testSIDVersionInitialization
   ));
 
   suiteOfTests->addTest(new CppUnit::TestCaller<SidFlagsTest>(

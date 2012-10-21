@@ -12,7 +12,7 @@ SOURCES := testrunner.cpp testmemaddr.cpp testsidflags.cpp testsidheader.cpp tes
 
 OBJS := $(SOURCES:.cpp=.o)
 
-LIBS += ../lib/memaddr.o ../lib/sidflags.o ../lib/sidheader.o ../lib/sidheaderv2.o ../lib/sidstring.o ../lib/sidutils.o
+LIBS += ../lib/memaddr.o ../lib/sidexception.o ../lib/sidflags.o ../lib/sidheader.o ../lib/sidheaderv2.o ../lib/sidstring.o ../lib/sidutils.o
 
 test-compile: $(OBJS)
 	$(CC) $(DEBUG_OPTS) $(CFLAGS) -o $(TEST_EXEC_FILENAME) $(OBJS) $(LFLAGS) $(LIBS)
