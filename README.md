@@ -15,4 +15,10 @@ Test output is in XML or text format for automatic testing and GUI based for sup
 
 **Installation**
 
+On Linux:
+
     # yum install cppunit cppunit-devel
+
+On MacOS:
+
+    ...TO BE DONE...

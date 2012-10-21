@@ -1,7 +1,10 @@
 #ifndef TestUtils_h
 #define TestUtils_h
 
+#include <stdio.h>
+
 #include "constants.h"
+#include "sidutils.h"
 
 class TestUtils {
 

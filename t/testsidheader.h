@@ -18,6 +18,17 @@ class SidHeaderTest : public CppUnit::TestFixture {
     void tearDown();
 
     void testEquality();
+
+    void testMagicIDInitialization();
+    void testVersionInitialization();
+    void testDataOffsetInitialization();
+    void testLoadAddressInitialization();
+    void testInitAddressInitialization();
+    void testPlayAddressInitialization();
+    void testSongsInitialization();
+    void testStartSongInitialization();
+    void testSpeedInitialization();
+
     void testEmptyInitialization();
 
     static CppUnit::Test *suite();
