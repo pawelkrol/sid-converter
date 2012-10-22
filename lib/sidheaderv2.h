@@ -35,12 +35,14 @@ class SidHeaderV2 : public SidHeader {
 
     const byte *getFlags() const;
 
-    /*** TODO: implementation missing! ***/
-    // TODO: add missing accessor/setter methods...
-    //  * startPage
-    //  * pageLength
-    //  * reserved
-    /*** TODO: implementation missing! ***/
+    const byte *getStartPage() const;
+    const short int getStartPageNum() const;
+
+    const byte *getPageLength() const;
+    const short int getPageLengthNum() const;
+
+    const byte *getReserved() const;
+    const short int getReservedNum() const;
 
     const short int size() const;
 };

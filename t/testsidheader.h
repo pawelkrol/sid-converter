@@ -36,13 +36,13 @@ class SidHeaderTest : public CppUnit::TestFixture {
     void testAuthorInitialization();
     void testCopyrightInitialization();
     void testFlagsInitialization();
-    // TODO: add tests for other fields...
-    //  * startPage
-    //  * pageLength
-    //  * reserved
+    void testStartPageInitialization();
+    void testPageLengthInitialization();
+    void testReservedInitialization();
 
     // TODO: add tests for all set methods...
     // TODO: add tests for exceptions on invalid set values...
+    // TODO: add validation tests for values of all fields...
 
     void testEmptyInitialization();
 

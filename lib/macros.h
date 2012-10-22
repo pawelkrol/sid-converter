@@ -14,4 +14,10 @@
   delete v;                                    \
   return num;
 
+#define getSidHeaderNumValue_1byte(getValue) \
+  const byte *v       = getValue();          \
+  const short int num = *v;                  \
+  delete v;                                  \
+  return num;
+
 #endif // Macros_h

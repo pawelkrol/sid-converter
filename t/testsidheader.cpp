@@ -162,6 +162,42 @@ void SidHeaderTest :: testFlagsInitialization() {
   delete flags;
 }
 
+void SidHeaderTest :: testStartPageInitialization() {
+  const byte *startPage = sidheader_01->getStartPage();
+  const byte expectedStartPage [START_PAGE_SIZE] = { 0x00 };
+
+  CPPUNIT_ASSERT(TestUtils::compare(startPage, expectedStartPage, START_PAGE_SIZE) == 0);
+
+  delete startPage;
+
+  const short int startPageNum = sidheader_01->getStartPageNum();
+  CPPUNIT_ASSERT(startPageNum == 0x0000);
+}
+
+void SidHeaderTest :: testPageLengthInitialization() {
+  const byte *pageLength = sidheader_01->getPageLength();
+  const byte expectedPageLength [PAGE_LENGTH_SIZE] = { 0x00 };
+
+  CPPUNIT_ASSERT(TestUtils::compare(pageLength, expectedPageLength, PAGE_LENGTH_SIZE) == 0);
+
+  delete pageLength;
+
+  const short int pageLengthNum = sidheader_01->getPageLengthNum();
+  CPPUNIT_ASSERT(pageLengthNum == 0x0000);
+}
+
+void SidHeaderTest :: testReservedInitialization() {
+  const byte *reserved = sidheader_01->getReserved();
+  const byte expectedReserved [RESERVED_SIZE] = { 0x00, 0x00 };
+
+  CPPUNIT_ASSERT(TestUtils::compare(reserved, expectedReserved, RESERVED_SIZE) == 0);
+
+  delete reserved;
+
+  const short int reservedNum = sidheader_01->getReservedNum();
+  CPPUNIT_ASSERT(reservedNum == 0x0000);
+}
+
 void SidHeaderTest :: testEmptyInitialization() {
   const byte *header               = sidheader_01->get();
   const byte expectedHeader [HEADER_V2_SIZE] = {
@@ -251,6 +287,21 @@ CppUnit::Test *SidHeaderTest :: suite() {
   suiteOfTests->addTest(new CppUnit::TestCaller<SidHeaderTest>(
     "testFlagsInitialization",
     &SidHeaderTest::testFlagsInitialization
+  ));
+
+  suiteOfTests->addTest(new CppUnit::TestCaller<SidHeaderTest>(
+    "testStartPageInitialization",
+    &SidHeaderTest::testStartPageInitialization
+  ));
+
+  suiteOfTests->addTest(new CppUnit::TestCaller<SidHeaderTest>(
+    "testPageLengthInitialization",
+    &SidHeaderTest::testPageLengthInitialization
+  ));
+
+  suiteOfTests->addTest(new CppUnit::TestCaller<SidHeaderTest>(
+    "testReservedInitialization",
+    &SidHeaderTest::testReservedInitialization
   ));
 
   suiteOfTests->addTest(new CppUnit::TestCaller<SidHeaderTest>(

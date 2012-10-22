@@ -38,6 +38,17 @@ const bool SidHeaderV2 :: compare(const SidHeaderV2& a, const SidHeaderV2& b) {
 SidHeaderV2 :: SidHeaderV2() {
   byte _version [VERSION_SIZE] = { 0x00, 0x02 };
   memcpy(version, _version, VERSION_SIZE);
+
+  flags.setDefaults();
+
+  byte _startPage [START_PAGE_SIZE] = { 0x00 };
+  memcpy(startPage, _startPage, START_PAGE_SIZE);
+
+  byte _pageLength [PAGE_LENGTH_SIZE] = { 0x00 };
+  memcpy(pageLength, _pageLength, PAGE_LENGTH_SIZE);
+
+  byte _reserved [RESERVED_SIZE] = { 0x00, 0x00 };
+  memcpy(reserved, _reserved, RESERVED_SIZE);
 }
 
 const byte *SidHeaderV2 :: get() const {
@@ -61,6 +72,30 @@ const byte *SidHeaderV2 :: get() const {
 const byte *SidHeaderV2 :: getFlags() const {
   const byte *flagsBytes = flags.get();
   return flagsBytes;
+}
+
+const byte *SidHeaderV2 :: getStartPage() const {
+  getSidHeaderValue(startPage, START_PAGE_SIZE)
+}
+
+const short int SidHeaderV2 :: getStartPageNum() const {
+  getSidHeaderNumValue_1byte(getStartPage)
+}
+
+const byte *SidHeaderV2 :: getPageLength() const {
+  getSidHeaderValue(pageLength, PAGE_LENGTH_SIZE)
+}
+
+const short int SidHeaderV2 :: getPageLengthNum() const {
+  getSidHeaderNumValue_1byte(getPageLength)
+}
+
+const byte *SidHeaderV2 :: getReserved() const {
+  getSidHeaderValue(reserved, RESERVED_SIZE)
+}
+
+const short int SidHeaderV2 :: getReservedNum() const {
+  getSidHeaderNumValue(getReserved)
 }
 
 const short int SidHeaderV2 :: size() const {
