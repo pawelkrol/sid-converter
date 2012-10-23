@@ -13,19 +13,29 @@ bool operator==(const MemoryAddress &a, const MemoryAddress &b) {
   return result;
 }
 
-MemoryAddress :: MemoryAddress(byte memaddr_lo, byte memaddr_hi) :
+void MemoryAddress :: set(const addr &memaddr) {
+  lo = byte(memaddr & 0x00ff);
+  hi = byte((memaddr & 0xff00) >> 8);
+}
+
+MemoryAddress :: MemoryAddress(const byte &memaddr_lo, const byte &memaddr_hi) :
   lo(memaddr_lo),
   hi(memaddr_hi)
 {}
 
-MemoryAddress :: MemoryAddress(addr memaddr) {
+MemoryAddress :: MemoryAddress(const addr &memaddr) {
 #ifdef DEBUG
   printf("\n*** MemoryAddress::constructor(addr) ***");
   printf("\n  Input parameter as short int = $%04x", memaddr);
 #endif
 
-  lo = byte(memaddr & 0x00ff);
-  hi = byte((memaddr & 0xff00) >> 8);
+  set(memaddr);
+}
+
+MemoryAddress :: MemoryAddress(const MemoryAddress &cAddr) {
+  const addr memaddr = cAddr.get();
+
+  set(memaddr);
 }
 
 MemoryAddress :: MemoryAddress() :
@@ -33,7 +43,13 @@ MemoryAddress :: MemoryAddress() :
   hi(0x00)
 {}
 
-addr MemoryAddress :: memaddr() {
+MemoryAddress& MemoryAddress :: operator=(const addr &memaddr) {
+  set(memaddr);
+
+  return *this;
+}
+
+const addr MemoryAddress :: get() const {
   addr memaddr = (hi << 8 + lo) & 0xffff;
 
 #ifdef DEBUG
@@ -42,4 +58,13 @@ addr MemoryAddress :: memaddr() {
 #endif
 
   return memaddr;
+}
+
+const byte *MemoryAddress :: getLoHi() const {
+  byte *loHi = new byte [2];
+
+  loHi[0] = lo;
+  loHi[1] = hi;
+
+  return loHi;
 }

@@ -13,6 +13,7 @@ class SidDataTest : public CppUnit::TestFixture {
 
   private:
     SidData *siddata_01, *siddata_02;
+    SidData *siddata_03, *siddata_04;
 
   public:
     void setUp();
@@ -23,6 +24,7 @@ class SidDataTest : public CppUnit::TestFixture {
     void testGetAddress();
     void testGetFileData();
     void testGetRawData();
+    void testGetRawDataLength();
 
     void testEmptyInitialization();
 

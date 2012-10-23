@@ -43,3 +43,24 @@ const char *SidUtils :: dumpData(const byte *data, const unsigned int size, cons
   memcpy(dump, buffer.c_str(), length);
   return dump;
 }
+
+const addr SidUtils :: twoBytesToAddr(const byte *loHi) {
+  const byte lo = *(loHi + 0);
+  const byte hi = *(loHi + 1);
+
+  addr memaddr = lo + hi << 8;
+
+  return memaddr;
+}
+
+const byte* addrToTwoBytes(const addr& memaddr) {
+  byte *loHi = new byte [2];
+
+  byte lo = byte(memaddr & 0x00ff);
+  byte hi = byte((memaddr & 0xff00) >> 8);
+
+  loHi[0] = lo;
+  loHi[1] = hi;
+
+  return loHi;
+}

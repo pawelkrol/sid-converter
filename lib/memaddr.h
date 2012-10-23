@@ -14,12 +14,18 @@ class MemoryAddress {
 
     friend bool operator==(const MemoryAddress& a, const MemoryAddress& b);
 
+    void set(const addr &memaddr);
+
   public:
-    MemoryAddress(byte memaddr_lo, byte memaddr_hi);
-    MemoryAddress(addr memaddr);
+    MemoryAddress(const byte &memaddr_lo, const byte &memaddr_hi);
+    MemoryAddress(const addr &memaddr);
+    MemoryAddress(const MemoryAddress &memaddr);
     MemoryAddress();
 
-    addr memaddr();
+    MemoryAddress& operator=(const addr &memaddr);
+
+    const addr get() const;
+    const byte *getLoHi() const;
 };
 
 #endif // MemAddr_h

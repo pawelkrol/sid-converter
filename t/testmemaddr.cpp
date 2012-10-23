@@ -22,8 +22,8 @@ void MemoryAddressTest :: testEquality() {
 void MemoryAddressTest :: testAddressValue() {
   addr memaddr = 0x1000;
 
-  CPPUNIT_ASSERT(memaddr_1000_01->memaddr() == memaddr);
-  CPPUNIT_ASSERT(memaddr_1000_02->memaddr() == memaddr);
+  CPPUNIT_ASSERT(memaddr_1000_01->get() == memaddr);
+  CPPUNIT_ASSERT(memaddr_1000_02->get() == memaddr);
 }
 
 CppUnit::Test *MemoryAddressTest :: suite() {
