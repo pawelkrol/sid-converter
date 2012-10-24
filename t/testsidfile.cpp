@@ -1,3 +1,3 @@
-#include "sidfile.h"
+#include "testsidfile.h"
 
 // TODO: add missing implementation...
