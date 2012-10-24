@@ -79,9 +79,12 @@ const unsigned short int SidData :: getRawDataLength() const {
 
 const byte *SidData :: getRawData(unsigned short int &len) const {
   const unsigned short int amount = getRawDataLength();
+  len = amount;
+  if (amount == 0) {
+    return NULL;
+  }
   byte *rawData = new byte [amount];
   memcpy(rawData, data, amount);
-  len = amount;
   return rawData;
 }
 
@@ -99,7 +102,7 @@ const byte *SidData :: getFileData(unsigned short int &len) const {
   delete addr;
   delete rawData;
 
-  len = length;
+  len = length + 2;
 
   return fileData;
 }

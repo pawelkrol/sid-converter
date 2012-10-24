@@ -1,8 +1,8 @@
 #ifndef TestSidData_h
 #define TestSidData_h
 
+#include "memaddr.h"
 #include "siddata.h"
-
 #include "testutils.h"
 
 #include <TestCaller.h>

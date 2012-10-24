@@ -24,23 +24,57 @@ void SidDataTest :: testEquality() {
 }
 
 void SidDataTest :: testGetAddress() {
-  // TODO: fix this dummy test and write some real code...
-  CPPUNIT_ASSERT(0 == 1);
+  const MemoryAddress memaddr_01 = siddata_01->getAddress();
+  const MemoryAddress memaddr_03 = siddata_03->getAddress();
+
+  CPPUNIT_ASSERT(memaddr_01 == MemoryAddress(0x0000));
+  CPPUNIT_ASSERT(memaddr_03 == MemoryAddress(0x1000));
 }
 
 void SidDataTest :: testGetFileData() {
-  // TODO: fix this dummy test and write some real code...
-  CPPUNIT_ASSERT(0 == 1);
+  unsigned short int len_01, len_03;
+
+  const byte *data_01 = siddata_01->getFileData(len_01);
+  const byte expectedData_01 [2] = { 0x00, 0x00 };
+
+  const byte *data_03 = siddata_03->getFileData(len_03);
+  const byte expectedData_03 [9] = { 0x00, 0x10, 0x4c, 0x06, 0x10, 0x4c, 0x06, 0x10, 0x60 };
+
+  CPPUNIT_ASSERT(len_01 == 2);
+  CPPUNIT_ASSERT(len_03 == 9);
+
+  CPPUNIT_ASSERT(TestUtils::compare(data_01, expectedData_01, len_01) == 0);
+  CPPUNIT_ASSERT(TestUtils::compare(data_03, expectedData_03, len_03) == 0);
+
+  delete data_01;
+  delete data_03;
 }
 
 void SidDataTest :: testGetRawData() {
-  // TODO: fix this dummy test and write some real code...
-  CPPUNIT_ASSERT(0 == 1);
+  unsigned short int len_01, len_03;
+
+  const byte *raw_01 = siddata_01->getRawData(len_01);
+  const byte *expectedRaw_01 = NULL;
+
+  const byte *raw_03 = siddata_03->getRawData(len_03);
+  const byte expectedRaw_03 [7] = { 0x4c, 0x06, 0x10, 0x4c, 0x06, 0x10, 0x60 };
+
+  CPPUNIT_ASSERT(len_01 == 0);
+  CPPUNIT_ASSERT(len_03 == 7);
+
+  CPPUNIT_ASSERT(raw_01 == expectedRaw_01);
+  CPPUNIT_ASSERT(TestUtils::compare(raw_03, expectedRaw_03, len_03) == 0);
+
+  delete raw_01;
+  delete raw_03;
 }
 
 void SidDataTest :: testGetRawDataLength() {
-  // TODO: fix this dummy test and write some real code...
-  CPPUNIT_ASSERT(0 == 1);
+  const unsigned short int len_01 = siddata_01->getRawDataLength();
+  const unsigned short int len_03 = siddata_03->getRawDataLength();
+
+  CPPUNIT_ASSERT(len_01 == 0);
+  CPPUNIT_ASSERT(len_03 == 7);
 }
 
 void SidDataTest :: testEmptyInitialization() {

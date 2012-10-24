@@ -13,8 +13,8 @@ int TestUtils :: compare(const byte *a, const byte *b, unsigned int size = -1) {
       printf("\n  But got: $%02x at *(a + $%02x)", *a, totalSize - size);
       const char *aDump = SidUtils::dumpData(startA, totalSize, 16);
       const char *bDump = SidUtils::dumpData(startB, totalSize, 16);
-      printf("\n\n  *a data dump:\n%s\n", aDump);
-      printf("\n  *b data dump:\n%s\n", bDump);
+      printf("\n\n  *a data dump (a = %p):\n%s\n", startA, aDump);
+      printf("\n  *b data dum (b = %p):\n%s\n", startB, bDump);
       delete aDump;
       delete bDump;
       printf("\n  Comparison result = %s", bool2str(false));
