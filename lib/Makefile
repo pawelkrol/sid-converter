@@ -1,6 +1,6 @@
 include ../config
 
-SOURCES := memaddr.cpp siddata.cpp sidexception.cpp sidheader.cpp sidheaderv2.cpp sidfile.cpp sidflags.cpp sidstring.cpp sidutils.cpp
+SOURCES := memaddr.cpp siddata.cpp sidexception.cpp sidfile.cpp sidfileutils.cpp sidflags.cpp sidheader.cpp sidheaderv2.cpp sidstring.cpp sidutils.cpp
 
 OBJS := $(SOURCES:.cpp=.o)
 
