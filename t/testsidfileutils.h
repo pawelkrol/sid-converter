@@ -7,7 +7,7 @@
 #include <TestCase.h>
 #include <TestSuite.h>
 
-class SidStringTest : public CppUnit::TestFixture {
+class SidFileUtilsTest : public CppUnit::TestFixture {
 
   public:
     void setUp();
