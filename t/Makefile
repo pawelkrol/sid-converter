@@ -1,6 +1,6 @@
 include ../config
 
-CFLAGS=-I../lib -I/usr/include/cppunit
+CFLAGS=-I../lib -I/usr/include/cppunit -std=gnu++11
 LFLAGS=-L../lib -L/usr/lib64
 LIBS=-lcppunit
 
@@ -8,7 +8,7 @@ clean:
 	rm -f *.o
 	rm -f $(TEST_EXEC_FILENAME)
 
-SOURCES := testrunner.cpp testmemaddr.cpp testsiddata.cpp testsidfile.cpp testsidfileutils.cpp testsidflags.cpp testsidheader.cpp testsidstring.cpp testutils.cpp
+SOURCES := testrunner.cpp testmemaddr.cpp testsiddata.cpp testsidfile.cpp testsidfileutils.cpp testsidflags.cpp testsidheader.cpp testsidstring.cpp testfileutils.cpp testutils.cpp
 
 OBJS := $(SOURCES:.cpp=.o)
 

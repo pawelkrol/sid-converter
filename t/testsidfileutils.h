@@ -2,6 +2,8 @@
 #define TestSidFileUtils_h
 
 #include "sidfileutils.h"
+#include "testfileutils.h"
+#include "testutils.h"
 
 #include <TestCaller.h>
 #include <TestCase.h>

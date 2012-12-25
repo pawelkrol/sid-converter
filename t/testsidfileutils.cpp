@@ -7,18 +7,22 @@ void SidFileUtilsTest :: tearDown() {
 }
 
 void SidFileUtilsTest :: testExists() {
-  const char *filename = "## TODO ##";
+  const char *filename = TestFileUtils::createRandomFile();
   const bool result = SidFileUtils::exists(filename);
-  // TODO: add missing implementation...
-  CPPUNIT_ASSERT(1 == 0);
+  TestFileUtils::removeRandomFile(filename);
+  CPPUNIT_ASSERT(result);
 }
 
 void SidFileUtilsTest :: testRead() {
-  const char *filename = "## TODO ##";
-  unsigned int filesize;
+  const int numBytes = 9;
+  const byte expectedData [numBytes] = { 0x00, 0x10, 0x4c, 0x06, 0x10, 0x4c, 0x06, 0x10, 0x60 };
+  const char *filename = TestFileUtils::createRandomFile(expectedData, numBytes);
+  unsigned long int filesize;
   const byte *data = SidFileUtils::read(filename, filesize);
-  // TODO: add missing implementation...
-  CPPUNIT_ASSERT(1 == 0);
+  TestFileUtils::removeRandomFile(filename);
+  CPPUNIT_ASSERT(filesize == numBytes);
+  CPPUNIT_ASSERT(TestUtils::compare(data, expectedData, numBytes) == 0);
+  delete data;
 }
 
 void SidFileUtilsTest :: testWrite() {

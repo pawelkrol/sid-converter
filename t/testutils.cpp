@@ -26,3 +26,11 @@ int TestUtils :: compare(const byte *a, const byte *b, unsigned int size = -1) {
   while (--size > 0);
   return 0;
 }
+
+const char *TestUtils :: getcwd() {
+  char buffer [PATH_MAX];
+
+  // TODO: add missing implementation...
+
+  return NULL;
+}
