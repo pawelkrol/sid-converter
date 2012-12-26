@@ -20,6 +20,39 @@ const char *TestFileUtils :: createRandomFile(const byte *data, const unsigned i
   return fileName;
 }
 
+/* Example:
+ * #include "testfileutils.h"
+ * unsigned int numBytes;
+ * const char *fileName = TestFileUtils::createEmptySidFile(numBytes);
+ * TestFileUtils::removeRandomFile(fileName);
+ */
+const char *TestFileUtils :: createEmptySidFile(unsigned int &numBytes) {
+  const unsigned int dataSize = 9;
+  const byte data [dataSize] = { 0x00, 0x10, 0x4c, 0x06, 0x10, 0x4c, 0x06, 0x10, 0x60 };
+
+  SidHeader *sidHeader = new SidHeaderV2();
+  const short int headerSize = sidHeader->size();
+
+  const unsigned int fileSize = dataSize + headerSize;
+  byte *sid = new byte(fileSize);
+
+  const byte *headerData = sidHeader->get();
+  memcpy(sid, headerData, headerSize);
+
+  memcpy(sid + headerSize, data, dataSize);
+
+  const char *filename = createRandomFile(sid, fileSize);
+
+  delete headerData;
+  delete sid;
+  delete sidHeader;
+
+  return filename;
+}
+
+// TODO
+// const char *TestFileUtils :: createRandomSidFile(unsigned int &numBytes)
+
 void TestFileUtils :: removeRandomFile(const char *fileName) {
   if (remove(fileName) != 0) {
     perror("Error deleting tempfile");
