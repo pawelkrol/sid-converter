@@ -26,8 +26,6 @@ class SidHeaderV2 : public SidHeader {
     friend bool operator==(const SidHeaderV2& a, const SidHeaderV2& b);
     friend bool operator!=(const SidHeaderV2& a, const SidHeaderV2& b);
 
-    static const bool compare(const SidHeaderV2& a, const SidHeaderV2& b);
-
   public:
     SidHeaderV2();
 

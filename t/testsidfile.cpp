@@ -50,12 +50,12 @@ void SidFileTest :: tearDown() {
 void SidFileTest :: testBuildEmpty() {
   const SidFile *empty = new SidFile();
 // TODO: REMOVE IT!!!
-printf("\n>>> new SidFile() <<<\n");
-empty->showDataDump();
+//printf("\n>>> new SidFile() <<<\n");
+//empty->showDataDump();
   const SidFile expected = getEmptyFile();
 // TODO: REMOVE IT!!!
-printf("\n>>> getEmptyFile() <<<\n");
-expected.showDataDump();
+//printf("\n>>> getEmptyFile() <<<\n");
+//expected.showDataDump();
   CPPUNIT_ASSERT(*empty == expected);
   delete empty;
 }

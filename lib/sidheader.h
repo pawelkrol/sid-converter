@@ -58,6 +58,8 @@ class SidHeader {
     // MemoryAddress playAddr;
 
   protected:
+    static const bool compare(const SidHeader& a, const SidHeader& b);
+
     void showCommonDataDump() const;
 
   public:

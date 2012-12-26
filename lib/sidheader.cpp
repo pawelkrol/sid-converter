@@ -1,5 +1,19 @@
 #include "sidheader.h"
 
+const bool SidHeader :: compare(const SidHeader& a, const SidHeader& b) {
+  const byte *dataA = a.get();
+  const byte *dataB = b.get();
+
+  const short int headerSize = a.size();
+
+  bool result = SidUtils::compareData(dataA, dataB, headerSize);
+
+  delete dataA;
+  delete dataB;
+
+  return result;
+}
+
 SidHeader :: SidHeader() {
   byte _magicID [MAGICID_SIZE] = { 0x50, 0x53, 0x49, 0x44 };
   memcpy(magicID, _magicID, MAGICID_SIZE);

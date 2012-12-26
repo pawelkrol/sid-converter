@@ -9,8 +9,32 @@ bool operator!=(const SidFile& a, const SidFile& b) {
 }
 
 const bool SidFile :: compare(const SidFile& a, const SidFile& b) {
-  // TODO: fix "segmentation fault" implementation here...
-  return !strcmp(a.file, b.file) && a.data == b.data && a.header == b.header;
+  const short int headerVersionA = a.header->getVersionNum();
+  const short int headerVersionB = b.header->getVersionNum();
+
+  if (headerVersionA != headerVersionB) {
+    return false;
+  }
+
+  if (a.file != b.file && strcmp(a.file, b.file) != 0) {
+    return false;
+  }
+
+  if (*a.data != *b.data) {
+    return false;
+  }
+
+  switch (headerVersionA) {
+    case 1: {
+      return *(SidHeaderV1 *)a.header == *(SidHeaderV1 *)b.header;
+    }
+    case 2: {
+      return *(SidHeaderV2 *)a.header == *(SidHeaderV2 *)b.header;
+    }
+    default: {
+      throw SidException("Invalid SID file version header");
+    }
+  }
 }
 
 SidFile :: SidFile() : data(new SidData()), file(NULL), header(new SidHeaderV2()) {}

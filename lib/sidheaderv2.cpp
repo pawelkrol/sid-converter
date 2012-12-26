@@ -1,7 +1,7 @@
 #include "sidheaderv2.h"
 
 bool operator==(const SidHeaderV2 &a, const SidHeaderV2 &b) {
-  bool result = SidHeaderV2::compare(a, b);
+  bool result = SidHeader::compare(a, b);
 
 #ifdef DEBUG
   const char *aDump = a.dataDump();
@@ -20,24 +20,13 @@ bool operator==(const SidHeaderV2 &a, const SidHeaderV2 &b) {
 }
 
 bool operator!=(const SidHeaderV2 &a, const SidHeaderV2 &b) {
-  return !SidHeaderV2::compare(a, b);
-}
-
-const bool SidHeaderV2 :: compare(const SidHeaderV2& a, const SidHeaderV2& b) {
-  const byte *dataA = a.get();
-  const byte *dataB = b.get();
-
-  bool result = SidUtils::compareData(dataA, dataB, HEADER_V2_SIZE);
-
-  delete dataA;
-  delete dataB;
-
-  return result;
+  return !SidHeader::compare(a, b);
 }
 
 SidHeaderV2& SidHeaderV2 :: operator=(const SidHeaderV2& sidHeader) {
 //throw SidException("\n## TODO: now ##\n");
   // TODO: implementation missing...
+  // TODO: currently assignment doesn't work, this will obviously not work if anything was changed in header
   SidHeaderV2 header = SidHeaderV2();
   return header;
 }
