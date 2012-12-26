@@ -1,5 +1,5 @@
-#ifndef TestSidFileUtils_h
-#define TestSidFileUtils_h
+#ifndef TestSidFile_h
+#define TestSidFile_h
 
 #include "sidfile.h"
 
@@ -7,7 +7,7 @@
 #include <TestCase.h>
 #include <TestSuite.h>
 
-class SidStringTest : public CppUnit::TestFixture {
+class SidFileTest : public CppUnit::TestFixture {
 
   public:
     void setUp();
@@ -23,4 +23,4 @@ class SidStringTest : public CppUnit::TestFixture {
     static CppUnit::Test *suite();
 };
 
-#endif // TestSidFileUtils_h
+#endif // TestSidFile_h
