@@ -6,6 +6,14 @@ const short int SidUtils :: hexToInt(const byte *hex) {
   return atoi(val);
 }
 
+void SidUtils :: intToHex(short int val, byte *hex, unsigned int numBytes) {
+  while (numBytes-- > 0) {
+    *(hex + numBytes) = byte(val & 0x00ff);
+    hex++;
+    val = val >> 8;
+  }
+}
+
 const bool SidUtils :: compareData(const byte *dataA, const byte *dataB, const unsigned int size) {
   bool result = true;
 

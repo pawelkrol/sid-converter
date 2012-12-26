@@ -21,10 +21,12 @@ class SidData {
 
   public:
     SidData();
-    SidData(const byte *data, unsigned short int dataSize);
-    SidData(const byte *raw, unsigned short int rawSize, const MemoryAddress addr);
+    SidData(const byte *data, const unsigned short int dataSize);
+    SidData(const byte *raw, const unsigned short int rawSize, const MemoryAddress addr);
 
     ~SidData();
+
+    SidData& operator=(const SidData& sidData);
 
     const MemoryAddress getAddress() const;
     const unsigned short int getRawDataLength() const;

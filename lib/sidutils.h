@@ -13,6 +13,7 @@ class SidUtils {
 
   public:
     static const short int hexToInt(const byte *hex);
+    static void intToHex(short int integer, byte *hex, unsigned int numBytes);
 
     static const bool compareData(const byte *dataA, const byte *dataB, const unsigned int size);
 

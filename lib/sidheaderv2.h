@@ -31,6 +31,10 @@ class SidHeaderV2 : public SidHeader {
   public:
     SidHeaderV2();
 
+    ~SidHeaderV2();
+
+    SidHeaderV2& operator=(const SidHeaderV2& sidHeader);
+
     const byte *get() const;
 
     const byte *getFlags() const;
@@ -45,6 +49,10 @@ class SidHeaderV2 : public SidHeader {
     const short int getReservedNum() const;
 
     const short int size() const;
+
+    void validate() const;
+
+    void showDataDump() const;
 };
 
 #endif // SidHeaderV2_h

@@ -50,7 +50,7 @@ MemoryAddress& MemoryAddress :: operator=(const addr &memaddr) {
 }
 
 const addr MemoryAddress :: get() const {
-  addr memaddr = (hi << 8 + lo) & 0xffff;
+  addr memaddr = ((hi << 8) + lo) & 0xffff;
 
 #ifdef DEBUG
  printf("\n*** MemoryAddress::memaddr ***");

@@ -1,5 +1,44 @@
 #include "testsidfile.h"
 
+const SidData SidFileTest :: getDefaultData() {
+  const unsigned short int dataSize = 9;
+  const byte data [dataSize] = { 0x00, 0x10, 0x4c, 0x06, 0x10, 0x4c, 0x06, 0x10, 0x60 };
+  SidData sidData = SidData(data, dataSize);
+  return sidData;
+}
+
+const SidHeaderV2 SidFileTest :: getDefaultHeader() {
+  // TODO: add missing implementation...
+  SidHeaderV2 sidHeader = SidHeaderV2();
+  // TODO: set some values differently...
+  return sidHeader;
+}
+
+const SidFile SidFileTest :: getDefaultFile() {
+  // TODO: add missing implementation...
+  SidFile sidFile = SidFile();
+  return sidFile;
+}
+
+const SidData SidFileTest :: getEmptyData() {
+  const unsigned short int dataSize = 2;
+  const byte data [dataSize] = { 0x00, 0x00 }; // TODO: $0000 ???
+  SidData sidData = SidData(data, dataSize);
+  return sidData;
+}
+
+const SidHeaderV2 SidFileTest :: getEmptyHeader() {
+  SidHeaderV2 sidHeader = SidHeaderV2();
+  return sidHeader;
+}
+
+const SidFile SidFileTest :: getEmptyFile() {
+  const SidHeaderV2 header = getEmptyHeader();
+  const SidData data = getEmptyData();
+  SidFile sidFile = SidFile(header, data);
+  return sidFile;
+}
+
 void SidFileTest :: setUp() {
   // TODO: add missing implementation...
 }
@@ -9,8 +48,16 @@ void SidFileTest :: tearDown() {
 }
 
 void SidFileTest :: testBuildEmpty() {
-  // TODO: add missing implementation...
-  CPPUNIT_ASSERT(1 == 0);
+  const SidFile *empty = new SidFile();
+// TODO: REMOVE IT!!!
+printf("\n>>> new SidFile() <<<\n");
+empty->showDataDump();
+  const SidFile expected = getEmptyFile();
+// TODO: REMOVE IT!!!
+printf("\n>>> getEmptyFile() <<<\n");
+expected.showDataDump();
+  CPPUNIT_ASSERT(*empty == expected);
+  delete empty;
 }
 
 void SidFileTest :: testBuildFromFile() {

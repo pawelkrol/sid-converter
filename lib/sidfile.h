@@ -4,6 +4,8 @@
 #include "constants.h"
 #include "siddata.h"
 #include "sidheader.h"
+#include "sidheaderv1.h"
+#include "sidheaderv2.h"
 
 class SidFile {
 
@@ -13,15 +15,26 @@ class SidFile {
     SidData *data;
     SidHeader *header;
 
+    friend bool operator==(const SidFile& a, const SidFile& b);
+    friend bool operator!=(const SidFile& a, const SidFile& b);
+
+    static const bool compare(const SidFile& a, const SidFile& b);
+
   public:
     SidFile();
     SidFile(const char *filename);
     SidFile(const byte *siddata, unsigned short int dataSize);
+    SidFile(const SidHeader &header, const SidData &data);
 
     ~SidFile();
 
+    const char *getFile() const;
+    void setFile(const char *filename);
+
     void load();
     void save() const;
+
+    void showDataDump() const;
 };
 
 #endif // SidFile_h

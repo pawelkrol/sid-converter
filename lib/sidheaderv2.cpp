@@ -35,9 +35,16 @@ const bool SidHeaderV2 :: compare(const SidHeaderV2& a, const SidHeaderV2& b) {
   return result;
 }
 
+SidHeaderV2& SidHeaderV2 :: operator=(const SidHeaderV2& sidHeader) {
+//throw SidException("\n## TODO: now ##\n");
+  // TODO: implementation missing...
+  SidHeaderV2 header = SidHeaderV2();
+  return header;
+}
+
 SidHeaderV2 :: SidHeaderV2() {
   byte _version [VERSION_SIZE] = { 0x00, 0x02 };
-  memcpy(version, _version, VERSION_SIZE);
+  setVersion(_version);
 
   flags.setDefaults();
 
@@ -49,6 +56,9 @@ SidHeaderV2 :: SidHeaderV2() {
 
   byte _reserved [RESERVED_SIZE] = { 0x00, 0x00 };
   memcpy(reserved, _reserved, RESERVED_SIZE);
+}
+
+SidHeaderV2 :: ~SidHeaderV2() {
 }
 
 const byte *SidHeaderV2 :: get() const {
@@ -100,4 +110,26 @@ const short int SidHeaderV2 :: getReservedNum() const {
 
 const short int SidHeaderV2 :: size() const {
   return HEADER_V2_SIZE;
+}
+
+void SidHeaderV2 :: validate() const {
+  // TODO: implementation missing...
+}
+
+void SidHeaderV2 :: showDataDump() const {
+  printf("\nSidHeaderV2 :: dataDump");
+  printf("\n=======================");
+  printf("\n  * object = %p", this);
+
+  showCommonDataDump();
+
+  const byte *_flags = flags.get();
+  showValueDump("flags", _flags, FLAGS_SIZE)
+  delete _flags;
+
+  showValueDump("startPage", startPage, START_PAGE_SIZE)
+  showValueDump("pageLength", pageLength, PAGE_LENGTH_SIZE)
+  showValueDump("reserved", reserved, RESERVED_SIZE)
+
+  printf("\n");
 }

@@ -2,12 +2,22 @@
 #define TestSidFile_h
 
 #include "sidfile.h"
+#include "sidheaderv2.h"
 
 #include <TestCaller.h>
 #include <TestCase.h>
 #include <TestSuite.h>
 
 class SidFileTest : public CppUnit::TestFixture {
+
+  private:
+    const SidData getDefaultData();
+    const SidHeaderV2 getDefaultHeader();
+    const SidFile getDefaultFile();
+
+    const SidData getEmptyData();
+    const SidHeaderV2 getEmptyHeader();
+    const SidFile getEmptyFile();
 
   public:
     void setUp();

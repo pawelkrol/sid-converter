@@ -4,6 +4,7 @@
 #include <string.h>
 
 #include "memaddr.h"
+#include "sidexception.h"
 #include "sidstring.h"
 #include "sidutils.h"
 
@@ -37,7 +38,7 @@
 
 class SidHeader {
 
-  protected:
+  private:
     byte magicID [MAGICID_SIZE]; // offset: 0x00
     byte version [VERSION_SIZE]; // offset: 0x04
     byte dataOffset [DATA_OFFSET_SIZE]; // offset: 0x06
@@ -56,16 +57,22 @@ class SidHeader {
     // MemoryAddress initAddr;
     // MemoryAddress playAddr;
 
+  protected:
+    void showCommonDataDump() const;
+
   public:
     SidHeader();
 
-    virtual const byte *get() const {};
+    virtual const byte *get() const = 0;
     const byte *getCommon() const;
 
     const byte *getMagicID() const;
 
     const byte *getVersion() const;
     const short int getVersionNum() const;
+
+    void setVersion(const byte version [VERSION_SIZE]);
+    void setVersionNum(const short int version);
 
     const byte *getDataOffset() const;
     const short int getDataOffsetNum() const;
@@ -98,9 +105,11 @@ class SidHeader {
 
     const char *dataDump() const;
 
-    virtual const short int size() const {};
+    virtual const short int size() const = 0;
 
-    virtual void validate() const {};
+    virtual void validate() const = 0;
+
+    virtual void showDataDump() const = 0;
 };
 
 #endif // SidHeader_h

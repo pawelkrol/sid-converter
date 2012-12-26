@@ -34,14 +34,13 @@ void SidData :: setRawData(const byte *raw, unsigned short int rawSize) {
   length = rawSize;
 }
 
-
 SidData :: SidData() :
   address(),
   data(NULL),
   length(0)
 {}
 
-SidData :: SidData(const byte *data, unsigned short int dataSize) {
+SidData :: SidData(const byte *data, const unsigned short int dataSize) {
   if (dataSize < 0x02) {
     throw SidException("Insufficient amount of data provided for proper initialization of SidData object instance: *data needs to contain at least two bytes!");
   }
@@ -56,7 +55,7 @@ SidData :: SidData(const byte *data, unsigned short int dataSize) {
   setRawData(data + 2, dataSize - 2);
 }
 
-SidData :: SidData(const byte *raw, unsigned short int rawSize, const MemoryAddress addr) {
+SidData :: SidData(const byte *raw, const unsigned short int rawSize, const MemoryAddress addr) {
   address = addr;
 
   setRawData(raw, rawSize);
@@ -67,6 +66,13 @@ SidData :: ~SidData() {
     delete data;
     data = NULL;
   }
+}
+
+SidData& SidData :: operator=(const SidData& sidData) {
+  address = sidData.address;
+  length = sidData.length;
+  setRawData(sidData.data, length);
+  return *this;
 }
 
 const MemoryAddress SidData :: getAddress() const {

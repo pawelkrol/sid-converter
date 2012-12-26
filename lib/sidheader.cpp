@@ -71,6 +71,14 @@ const byte *SidHeader :: getVersion() const {
   getSidHeaderValue(version, VERSION_SIZE)
 }
 
+void SidHeader :: setVersion(const byte version [VERSION_SIZE]) {
+  memcpy(this->version, version, VERSION_SIZE);
+}
+
+void SidHeader :: setVersionNum(const short int version) {
+  SidUtils::intToHex(version, this->version, VERSION_SIZE);
+}
+
 const short int SidHeader :: getVersionNum() const {
   getSidHeaderNumValue(getVersion)
 }
@@ -160,4 +168,20 @@ const char *SidHeader :: dataDump() const {
   delete dataBytes;
 
   return dump;
+}
+
+void SidHeader :: showCommonDataDump() const {
+  showValueDump("magicID", magicID, MAGICID_SIZE)
+  showValueDump("version", version, VERSION_SIZE)
+  showValueDump("dataOffset", dataOffset, DATA_OFFSET_SIZE)
+  showValueDump("loadAddress", loadAddress, LOAD_ADDRESS_SIZE)
+  showValueDump("initAddress", initAddress, INIT_ADDRESS_SIZE)
+  showValueDump("playAddress", playAddress, PLAY_ADDRESS_SIZE)
+  showValueDump("songs", songs, SONGS_SIZE)
+  showValueDump("startSong", startSong, START_SONG_SIZE)
+  showValueDump("speed", speed, SPEED_SIZE)
+
+  showSidStringDump("title", title)
+  showSidStringDump("author", author)
+  showSidStringDump("copyright", copyright)
 }
