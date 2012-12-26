@@ -26,12 +26,18 @@ void SidFileUtilsTest :: testRead() {
 }
 
 void SidFileUtilsTest :: testWrite() {
-  const char *filename = "## TODO ##";
-  const unsigned int filesize = 0;
-  const byte *data = NULL;
-  SidFileUtils::write(filename, filesize, data);
   // TODO: add missing implementation...
-  CPPUNIT_ASSERT(1 == 0);
+  const char *filename = tmpnam(NULL);
+  const unsigned int numBytes = 9;
+  const byte expectedData [numBytes] = { 0x00, 0x10, 0x4c, 0x06, 0x10, 0x4c, 0x06, 0x10, 0x60 };
+  SidFileUtils::write(filename, numBytes, expectedData);
+  // get file contents using TestFileUtils::getFileContents (implement it first!)
+  unsigned int filesize;
+  const byte *data = TestFileUtils::getFileContents(filename, filesize);
+  // compare fetched data with the original test file data and their sizes (assert...)
+  CPPUNIT_ASSERT(filesize == numBytes);
+  CPPUNIT_ASSERT(TestUtils::compare(data, expectedData, numBytes) == 0);
+  delete data;
 }
 
 CppUnit::Test *SidFileUtilsTest :: suite() {

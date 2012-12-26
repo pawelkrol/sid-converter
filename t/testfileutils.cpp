@@ -1,6 +1,6 @@
 #include "testfileutils.h"
 
-const char *TestFileUtils :: createRandomFile(const int numBytes) {
+const char *TestFileUtils :: createRandomFile(const unsigned int numBytes) {
   char *fileName = tmpnam(NULL);
   FILE *pFile = fopen(fileName, "w");
   for (int n = 0; n < numBytes; n++) {
@@ -10,7 +10,7 @@ const char *TestFileUtils :: createRandomFile(const int numBytes) {
   return fileName;
 }
 
-const char *TestFileUtils :: createRandomFile(const byte *data, const int numBytes) {
+const char *TestFileUtils :: createRandomFile(const byte *data, const unsigned int numBytes) {
   char *fileName = tmpnam(NULL);
   FILE *pFile = fopen(fileName, "w");
   for (int n = 0; n < numBytes; n++) {
@@ -25,6 +25,33 @@ void TestFileUtils :: removeRandomFile(const char *fileName) {
     perror("Error deleting tempfile");
     throw SidException("Error deleting tempfile");
   }
+}
+
+const byte *TestFileUtils :: getFileContents(const char *fileName, unsigned int &numBytes) {
+  FILE *pFile = fopen(fileName, "rb");
+  if (pFile == NULL) {
+    perror("File open error");
+    throw SidException("File open error");
+  }
+
+  fseek(pFile, 0, SEEK_END);
+  numBytes = ftell(pFile);
+  rewind(pFile);
+
+  byte *data = new byte [numBytes];
+  if (data == NULL) {
+    perror("Memory allocation error");
+    throw SidException("Memory allocation error");
+  }
+
+  size_t result = fread(data, 1, numBytes, pFile);
+  if (result != numBytes) {
+    perror("File read error");
+    throw SidException("File read error");
+  }
+
+  fclose(pFile);
+  return data;
 }
 
 /* Example:

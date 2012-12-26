@@ -34,5 +34,14 @@ const byte *SidFileUtils :: read(const char *filename, unsigned long int &filesi
 }
 
 void SidFileUtils :: write(const char *filename, const unsigned int filesize, const byte *data) {
-  // TODO: add missing implementation...
+  FILE *pFile = fopen(filename, "w");
+  if (pFile == NULL) {
+    throw SidException("File open error");
+  }
+
+  for (int n = 0; n < filesize; n++) {
+    fprintf(pFile, "%c", *(data + n));
+  }
+
+  fclose(pFile);
 }

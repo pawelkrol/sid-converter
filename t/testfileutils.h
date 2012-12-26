@@ -10,9 +10,10 @@
 class TestFileUtils {
 
   public:
-    static const char *createRandomFile(const int numBytes = 0);
-    static const char *createRandomFile(const byte *data, const int numBytes = 0);
+    static const char *createRandomFile(const unsigned int numBytes = 0);
+    static const char *createRandomFile(const byte *data, const unsigned int numBytes = 0);
     static void removeRandomFile(const char *fileName);
+    static const byte *getFileContents(const char *fileName, unsigned int &numBytes);
     static void showFileContents(const char *fileName, unsigned int bytesPerLine = 16, unsigned int maxBumBytes = 1024);
 };
 
