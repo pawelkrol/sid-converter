@@ -84,6 +84,13 @@ SidFile :: ~SidFile() {
   }
 }
 
+SidFile& SidFile :: operator=(const SidFile& sidFile) {
+  // TODO: add missing implementation...
+  // TODO: now it copies only pointers instead of the actual content
+  // TODO: (use strncpy and assignment operators for SidHeader and SidData objects)
+//  printf("\n[SidFile][operator=] Running now...\n");
+}
+
 const char *SidFile :: getFile() const {
   // TODO: add missing implementation...
 }

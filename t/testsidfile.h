@@ -11,6 +11,8 @@
 class SidFileTest : public CppUnit::TestFixture {
 
   private:
+    SidFile *sidfile_01, *sidfile_02;
+
     const SidData getDefaultData();
     const SidHeaderV2 getDefaultHeader();
     const SidFile getDefaultFile();

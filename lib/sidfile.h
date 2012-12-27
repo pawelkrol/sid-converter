@@ -28,6 +28,8 @@ class SidFile {
 
     ~SidFile();
 
+    SidFile& operator=(const SidFile& sidFile);
+
     const char *getFile() const;
     void setFile(const char *filename);
 

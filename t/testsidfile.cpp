@@ -8,21 +8,23 @@ const SidData SidFileTest :: getDefaultData() {
 }
 
 const SidHeaderV2 SidFileTest :: getDefaultHeader() {
-  // TODO: add missing implementation...
   SidHeaderV2 sidHeader = SidHeaderV2();
-  // TODO: set some values differently...
+  sidHeader.setTitleString("sid-converter");
+  sidHeader.setAuthorString("Pawel Krol");
+  sidHeader.setCopyrightString("(C) 2013 Pawel Krol");
   return sidHeader;
 }
 
 const SidFile SidFileTest :: getDefaultFile() {
-  // TODO: add missing implementation...
-  SidFile sidFile = SidFile();
+  const SidHeaderV2 header = getDefaultHeader();
+  const SidData data = getDefaultData();
+  SidFile sidFile = SidFile(header, data);
   return sidFile;
 }
 
 const SidData SidFileTest :: getEmptyData() {
   const unsigned short int dataSize = 2;
-  const byte data [dataSize] = { 0x00, 0x00 }; // TODO: $0000 ???
+  const byte data [dataSize] = { 0x00, 0x00 };
   SidData sidData = SidData(data, dataSize);
   return sidData;
 }
@@ -40,11 +42,15 @@ const SidFile SidFileTest :: getEmptyFile() {
 }
 
 void SidFileTest :: setUp() {
-  // TODO: add missing implementation...
+  sidfile_01 = new SidFile();
+  sidfile_02 = new SidFile();
+  *sidfile_01 = getEmptyFile();
+  *sidfile_02 = getDefaultFile();
 }
 
 void SidFileTest :: tearDown() {
-  // TODO: add missing implementation...
+  delete sidfile_01;
+  delete sidfile_02;
 }
 
 void SidFileTest :: testBuildEmpty() {
@@ -52,11 +58,7 @@ void SidFileTest :: testBuildEmpty() {
 // TODO: REMOVE IT!!!
 //printf("\n>>> new SidFile() <<<\n");
 //empty->showDataDump();
-  const SidFile expected = getEmptyFile();
-// TODO: REMOVE IT!!!
-//printf("\n>>> getEmptyFile() <<<\n");
-//expected.showDataDump();
-  CPPUNIT_ASSERT(*empty == expected);
+  CPPUNIT_ASSERT(*empty == *sidfile_01);
   delete empty;
 }
 

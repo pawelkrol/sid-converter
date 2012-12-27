@@ -157,6 +157,10 @@ const char *SidHeader :: getTitleString() const {
   return title.getString();
 }
 
+void SidHeader :: setTitleString(const char *str) {
+  title.setString(str);
+}
+
 const byte *SidHeader :: getAuthor() const {
   return author.getBytes();
 }
@@ -165,12 +169,20 @@ const char *SidHeader :: getAuthorString() const {
   return author.getString();
 }
 
+void SidHeader :: setAuthorString(const char *str) {
+  author.setString(str);
+}
+
 const byte *SidHeader :: getCopyright() const {
   return copyright.getBytes();
 }
 
 const char *SidHeader :: getCopyrightString() const {
   return copyright.getString();
+}
+
+void SidHeader :: setCopyrightString(const char *str) {
+  copyright.setString(str);
 }
 
 const char *SidHeader :: dataDump() const {

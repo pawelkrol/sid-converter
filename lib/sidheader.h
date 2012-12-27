@@ -99,11 +99,17 @@ class SidHeader {
     const byte *getTitle() const;
     const char *getTitleString() const;
 
+    void setTitleString(const char *str);
+
     const byte *getAuthor() const;
     const char *getAuthorString() const;
 
+    void setAuthorString(const char *str);
+
     const byte *getCopyright() const;
     const char *getCopyrightString() const;
+
+    void setCopyrightString(const char *str);
 
     const char *dataDump() const;
 
