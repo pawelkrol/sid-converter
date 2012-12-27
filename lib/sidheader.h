@@ -65,6 +65,8 @@ class SidHeader {
   public:
     SidHeader();
 
+    // virtual ~SidHeader() = 0;
+
     virtual const byte *get() const = 0;
     const byte *getCommon() const;
 

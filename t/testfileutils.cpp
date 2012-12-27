@@ -3,7 +3,7 @@
 const char *TestFileUtils :: createRandomFile(const unsigned int numBytes) {
   char *fileName = tmpnam(NULL);
   FILE *pFile = fopen(fileName, "w");
-  for (int n = 0; n < numBytes; n++) {
+  for (uint n = 0; n < numBytes; n++) {
     fprintf(pFile, "%c", rand() % 256);
   }
   fclose(pFile);
@@ -13,7 +13,7 @@ const char *TestFileUtils :: createRandomFile(const unsigned int numBytes) {
 const char *TestFileUtils :: createRandomFile(const byte *data, const unsigned int numBytes) {
   char *fileName = tmpnam(NULL);
   FILE *pFile = fopen(fileName, "w");
-  for (int n = 0; n < numBytes; n++) {
+  for (uint n = 0; n < numBytes; n++) {
     fprintf(pFile, "%c", *(data + n));
   }
   fclose(pFile);
@@ -107,7 +107,7 @@ void TestFileUtils :: showFileContents(const char *fileName, unsigned int bytesP
 
   printf("\nFILE: %s\n", fileName);
   printf("------");
-  for (int n = 0; n < strlen(fileName); n++) {
+  for (uint n = 0; n < strlen(fileName); n++) {
     printf("-");
   }
   printf("\n");
@@ -121,10 +121,10 @@ void TestFileUtils :: showFileContents(const char *fileName, unsigned int bytesP
 
   unsigned int numBytesRead = 0;
   size_t result;
-  while (result = fread(buffer, 1, bytesPerLine, pFile)) {
+  while ((result = fread(buffer, 1, bytesPerLine, pFile))) {
     printf("$%08x  ", offset);
     bool wasBroken = false;
-    for (int n = 0; n < result; n++) {
+    for (uint n = 0; n < result; n++) {
       printf("$%02x ", *(buffer + n));
       if (++numBytesRead >= maxNumBytes) {
         wasBroken = true;
