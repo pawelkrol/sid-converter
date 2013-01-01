@@ -33,6 +33,9 @@ class SidFile {
     const char *getFile() const;
     void setFile(const char *filename);
 
+    SidData *getData() const;
+    SidHeader *getHeader() const;
+
     void load();
     void save() const;
 

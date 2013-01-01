@@ -3,6 +3,14 @@
 
 #define bool2str(value) value ? "true" : "false"
 
+#define safeStringCopy(source,target) \
+{                                     \
+  size_t length = strlen(source);     \
+  target = new char(length + 1);      \
+  strncpy(target, source, length);    \
+  *(target + length - 1) = NULL;      \
+}
+
 #define getSidHeaderValue(value,size) \
   byte *_value = new byte[size];      \
   memcpy(_value, value, size);        \

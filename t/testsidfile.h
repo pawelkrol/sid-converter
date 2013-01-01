@@ -26,6 +26,8 @@ class SidFileTest : public CppUnit::TestFixture {
     void tearDown();
 
     void testBuildEmpty();
+    void testBuildDefault();
+
     void testBuildFromFile();
     void testBuildFromData();
 

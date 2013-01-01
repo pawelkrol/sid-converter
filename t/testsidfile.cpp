@@ -57,9 +57,25 @@ void SidFileTest :: testBuildEmpty() {
   const SidFile *empty = new SidFile();
 // TODO: REMOVE IT!!!
 //printf("\n>>> new SidFile() <<<\n");
-//empty->showDataDump();
   CPPUNIT_ASSERT(*empty == *sidfile_01);
   delete empty;
+}
+
+void SidFileTest :: testBuildDefault() {
+  const SidFile *sidFile = new SidFile();
+
+  SidHeader *header = sidFile->getHeader();
+  header->setTitleString("sid-converter");
+  header->setAuthorString("Pawel Krol");
+  header->setCopyrightString("(C) 2013 Pawel Krol");
+
+  SidData *data = sidFile->getData();
+  *data = getDefaultData();
+  // TODO: refactor it into some new exposed "SetDataBytes" method
+  // (of course it needs to be implemented in SidData class first)
+
+  CPPUNIT_ASSERT(*sidFile == *sidfile_02);
+  delete sidFile;
 }
 
 void SidFileTest :: testBuildFromFile() {
@@ -88,6 +104,11 @@ CppUnit::Test *SidFileTest :: suite() {
   suiteOfTests->addTest(new CppUnit::TestCaller<SidFileTest>(
     "testBuildEmpty",
     &SidFileTest::testBuildEmpty
+  ));
+
+  suiteOfTests->addTest(new CppUnit::TestCaller<SidFileTest>(
+    "testBuildDefault",
+    &SidFileTest::testBuildDefault
   ));
 
   suiteOfTests->addTest(new CppUnit::TestCaller<SidFileTest>(
