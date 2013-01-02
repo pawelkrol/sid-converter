@@ -3,6 +3,7 @@
 
 #include "constants.h"
 #include "siddata.h"
+#include "sidfileutils.h"
 #include "sidheader.h"
 #include "sidheaderv1.h"
 #include "sidheaderv2.h"
@@ -19,6 +20,8 @@ class SidFile {
     friend bool operator!=(const SidFile& a, const SidFile& b);
 
     static const bool compare(const SidFile& a, const SidFile& b);
+
+    const byte *getBytes(unsigned int& length) const;
 
   public:
     SidFile();
@@ -38,6 +41,7 @@ class SidFile {
 
     void load();
     void save() const;
+    void overwrite() const;
 
     void showDataDump() const;
 };

@@ -41,16 +41,36 @@ const SidFile SidFileTest :: getEmptyFile() {
   return sidFile;
 }
 
+const char *SidFileTest :: createTestFile() {
+  char *file;
+  const char *temp = tmpnam(NULL);
+  safeStringCopy(temp,file)
+
+  SidFile sidFile = getDefaultFile();
+  sidFile.setFile(file);
+  sidFile.save();
+
+  return file;
+}
+
 void SidFileTest :: setUp() {
   sidfile_01 = new SidFile();
   sidfile_02 = new SidFile();
   *sidfile_01 = getEmptyFile();
   *sidfile_02 = getDefaultFile();
+
+  const char *filename = createTestFile();
+  sidfile_03 = new SidFile(filename);
+  sidfile_04 = new SidFile(filename);
+  delete filename;
 }
 
 void SidFileTest :: tearDown() {
   delete sidfile_01;
   delete sidfile_02;
+
+  delete sidfile_03;
+  delete sidfile_04;
 }
 
 void SidFileTest :: testBuildEmpty() {

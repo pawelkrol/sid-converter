@@ -12,6 +12,7 @@ class SidFileTest : public CppUnit::TestFixture {
 
   private:
     SidFile *sidfile_01, *sidfile_02;
+    SidFile *sidfile_03, *sidfile_04;
 
     const SidData getDefaultData();
     const SidHeaderV2 getDefaultHeader();
@@ -20,6 +21,8 @@ class SidFileTest : public CppUnit::TestFixture {
     const SidData getEmptyData();
     const SidHeaderV2 getEmptyHeader();
     const SidFile getEmptyFile();
+
+    const char *createTestFile();
 
   public:
     void setUp();
