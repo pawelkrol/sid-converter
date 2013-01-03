@@ -30,6 +30,10 @@ SidString :: SidString() {
   empty();
 }
 
+SidString :: SidString(const byte *bytes) {
+  memcpy (data, bytes, SID_STRING_SIZE);
+}
+
 void SidString :: empty() {
   memset (data, 0x00, SID_STRING_SIZE);
 }

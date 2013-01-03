@@ -48,6 +48,16 @@ class SidFlags {
     const byte getClockBits() const;
     const byte getSidModelBits() const;
 
+    void setMusPlayer(const byte bits);
+    void setPsidSpecific(const byte bits);
+    void setClock(const byte bits);
+    void setSidModel(const byte bits);
+
+    const BinaryDataFormat getMusPlayer(const byte bits) const;
+    const PlaySIDSpecific getPsidSpecific(const byte bits) const;
+    const VideoStandard getClock(const byte bits) const;
+    const SIDVersion getSidModel(const byte bits) const;
+
     friend bool operator==(const SidFlags& a, const SidFlags& b);
     friend bool operator!=(const SidFlags& a, const SidFlags& b);
 
@@ -55,6 +65,7 @@ class SidFlags {
 
   public:
     SidFlags();
+    SidFlags(const byte *bytes);
 
     const byte *get() const;
 

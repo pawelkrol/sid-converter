@@ -23,6 +23,10 @@ class SidFile {
 
     const byte *getBytes(unsigned int& length) const;
 
+    void loadFile(const char *filename);
+
+    void cleanup();
+
   public:
     SidFile();
     SidFile(const char *filename);

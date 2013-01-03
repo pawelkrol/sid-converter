@@ -39,10 +39,8 @@ const bool SidFile :: compare(const SidFile& a, const SidFile& b) {
 
 SidFile :: SidFile() : data(new SidData()), file(NULL), header(new SidHeaderV2()) {}
 
-SidFile :: SidFile(const char *filename) {
-  // TODO: add missing implementation...
-  // TODO NOW!!! Because all tests are now failing in SidFileTest because of it...
-  throw SidException("Not implemented yet!");
+SidFile :: SidFile(const char *filename) : data(new SidData()), file(NULL), header(new SidHeaderV2()) {
+  loadFile(filename);
 }
 
 SidFile :: SidFile(const byte *siddata, unsigned short int dataSize) {
@@ -71,6 +69,10 @@ SidFile :: SidFile(const SidHeader &sidHeader, const SidData &sidData) : file(NU
 }
 
 SidFile :: ~SidFile() {
+  cleanup();
+}
+
+void SidFile :: cleanup() {
   if (data != NULL) {
     delete data;
     data = NULL;
@@ -136,6 +138,34 @@ const byte *SidFile :: getBytes(unsigned int& length) const {
   delete headerBytes;
 
   return bytes;
+}
+
+void SidFile :: loadFile(const char *filename) {
+  unsigned long int filesize;
+  const byte *bytes = SidFileUtils::read(filename, filesize);
+
+  // Remove all references to the data previously held by an object:
+  cleanup();
+
+  safeStringCopy(filename, this->file)
+
+  const short int headerVersionNum = SidHeader::checkVersionNum(bytes);
+  switch (headerVersionNum) {
+    case 1: {
+      header = new SidHeaderV1(bytes);
+      break;
+    }
+    case 2: {
+      header = new SidHeaderV2(bytes);
+      break;
+    }
+    default: {
+      throw SidException("Invalid SID file version header");
+    }
+  }
+
+  const short int headerSize = header->size();
+  data = new SidData(bytes + headerSize, filesize - headerSize);
 }
 
 void SidFile :: load() {

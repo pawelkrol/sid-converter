@@ -23,9 +23,14 @@ bool operator!=(const SidHeaderV2 &a, const SidHeaderV2 &b) {
   return !SidHeader::compare(a, b);
 }
 
-SidHeaderV2& SidHeaderV2 :: operator=(const SidHeaderV2& sidHeader) {
-//throw SidException("\n## TODO: now ##\n");
+SidHeaderV2 :: SidHeaderV2(const SidHeaderV2& sidHeader) {
   // TODO: implementation missing...
+  throw SidException("Implementation missing!");
+}
+
+SidHeaderV2& SidHeaderV2 :: operator=(const SidHeaderV2& sidHeader) {
+  // TODO: implementation missing...
+  throw SidException("Implementation missing!");
   // TODO: currently assignment doesn't work, this will obviously not work if anything was changed in header
   SidHeaderV2 header = SidHeaderV2();
   return header;
@@ -45,6 +50,16 @@ SidHeaderV2 :: SidHeaderV2() {
 
   byte _reserved [RESERVED_SIZE] = { 0x00, 0x00 };
   memcpy(reserved, _reserved, RESERVED_SIZE);
+}
+
+SidHeaderV2 :: SidHeaderV2(const byte *bytes) {
+  initCommon(bytes);
+
+  flags = SidFlags(bytes + FLAGS_OFFSET);
+
+  memcpy(startPage, bytes + START_PAGE_OFFSET, START_PAGE_SIZE);
+  memcpy(pageLength, bytes + PAGE_LENGTH_OFFSET, PAGE_LENGTH_SIZE);
+  memcpy(reserved, bytes + RESERVED_OFFSET, RESERVED_SIZE);
 }
 
 SidHeaderV2 :: ~SidHeaderV2() {

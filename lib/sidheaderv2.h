@@ -28,6 +28,8 @@ class SidHeaderV2 : public SidHeader {
 
   public:
     SidHeaderV2();
+    SidHeaderV2(const byte *bytes);
+    SidHeaderV2(const SidHeaderV2& sidHeader);
 
     ~SidHeaderV2();
 

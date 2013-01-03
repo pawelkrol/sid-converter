@@ -47,6 +47,26 @@ SidHeader :: SidHeader() {
   copyright.empty();
 }
 
+SidHeader :: SidHeader(const byte *bytes) {
+  initCommon(bytes);
+}
+
+void SidHeader :: initCommon(const byte *bytes) {
+  memcpy(magicID, bytes + MAGICID_OFFSET, MAGICID_SIZE);
+  memcpy(version, bytes + VERSION_OFFSET, VERSION_SIZE);
+  memcpy(dataOffset, bytes + DATA_OFFSET_OFFSET, DATA_OFFSET_SIZE);
+  memcpy(loadAddress, bytes + LOAD_ADDRESS_OFFSET, LOAD_ADDRESS_SIZE);
+  memcpy(initAddress, bytes + INIT_ADDRESS_OFFSET, INIT_ADDRESS_SIZE);
+  memcpy(playAddress, bytes + PLAY_ADDRESS_OFFSET, PLAY_ADDRESS_SIZE);
+  memcpy(songs, bytes + SONGS_OFFSET, SONGS_SIZE);
+  memcpy(startSong, bytes + START_SONG_OFFSET, START_SONG_SIZE);
+  memcpy(speed, bytes + SPEED_OFFSET, SPEED_SIZE);
+
+  title = SidString(bytes + TITLE_OFFSET);
+  author = SidString(bytes + AUTHOR_OFFSET);
+  copyright = SidString(bytes + COPYRIGHT_OFFSET);
+}
+
 const byte *SidHeader :: getCommon() const {
   byte *bytes = new byte[HEADER_COMMON_SIZE];
 
@@ -210,4 +230,10 @@ void SidHeader :: showCommonDataDump() const {
   showSidStringDump("title", title)
   showSidStringDump("author", author)
   showSidStringDump("copyright", copyright)
+}
+
+const short int SidHeader :: checkVersionNum(const byte *bytes) {
+  const byte *version = bytes + VERSION_OFFSET;
+  const short int versionNum = SidUtils::hexToInt(version);
+  return versionNum;
 }

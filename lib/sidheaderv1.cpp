@@ -11,6 +11,10 @@ bool operator!=(const SidHeaderV1 &a, const SidHeaderV1 &b) {
 SidHeaderV1 :: SidHeaderV1() {
 }
 
+SidHeaderV1 :: SidHeaderV1(const byte *bytes) {
+  initCommon(bytes);
+}
+
 SidHeaderV1 :: ~SidHeaderV1() {
 }
 

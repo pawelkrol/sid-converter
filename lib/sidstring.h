@@ -19,6 +19,7 @@ class SidString {
 
   public:
     SidString();
+    SidString(const byte *bytes);
 
     void empty();
 

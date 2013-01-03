@@ -27,6 +27,79 @@ SidFlags :: SidFlags() :
   sidModel(SID_MOS8580)
 {}
 
+SidFlags :: SidFlags(const byte *bytes) {
+  byte flags = *(bytes + 1);
+
+  setMusPlayer(flags);
+  setPsidSpecific(flags);
+  setClock(flags);
+  setSidModel(flags);
+}
+
+void SidFlags :: setMusPlayer(const byte bits) {
+  BinaryDataFormat format = getMusPlayer(bits);
+  setMusPlayer(format);
+}
+
+void SidFlags :: setPsidSpecific(const byte bits) {
+  PlaySIDSpecific specific = getPsidSpecific(bits);
+  setPsidSpecific(specific);
+}
+
+void SidFlags :: setClock(const byte bits) {
+  VideoStandard standard = getClock(bits);
+  setClock(standard);
+}
+
+void SidFlags :: setSidModel(const byte bits) {
+  SIDVersion version = getSidModel(bits);
+  setSidModel(version);
+}
+
+const BinaryDataFormat SidFlags :: getMusPlayer(const byte bits) const {
+  switch (bits & 0x01) {
+    case 0x00:
+      return PLAYER_BUILT_IN_MUSIC_PLAYER;
+    case 0x01:
+      return PLAYER_COMPUTES_SIDPLAYER_MUS_DATA;
+  }
+}
+
+const PlaySIDSpecific SidFlags :: getPsidSpecific(const byte bits) const {
+  switch (bits & 0x02) {
+    case 0x00:
+      return PSID_C64_COMPATIBLE;
+    case 0x02:
+      return PSID_PLAYSID_SPECIFIC;
+  }
+}
+
+const VideoStandard SidFlags :: getClock(const byte bits) const {
+  switch (bits & 0x0c) {
+    case 0x00:
+      return CLOCK_UNKNOWN;
+    case 0x04:
+      return CLOCK_PAL;
+    case 0x08:
+      return CLOCK_NTSC;
+    case 0x0c:
+      return CLOCK_PAL_AND_NTSC;
+  }
+}
+
+const SIDVersion SidFlags :: getSidModel(const byte bits) const {
+  switch (bits & 0x30) {
+    case 0x00:
+      return SID_UNKNOWN;
+    case 0x10:
+      return SID_MOS6581;
+    case 0x20:
+      return SID_MOS8580;
+    case 0x30:
+      return SID_MOS6581_AND_MOS8580;
+  }
+}
+
 const byte SidFlags :: getMusPlayerBits() const {
   switch (getMusPlayer()) {
     case PLAYER_BUILT_IN_MUSIC_PLAYER:
@@ -90,16 +163,32 @@ const BinaryDataFormat SidFlags :: getMusPlayer() const {
   return musPlayer;
 }
 
+void SidFlags :: setMusPlayer(BinaryDataFormat format) {
+  musPlayer = format;
+}
+
 const PlaySIDSpecific SidFlags :: getPsidSpecific() const {
   return psidSpecific;
+}
+
+void SidFlags :: setPsidSpecific(PlaySIDSpecific specific) {
+  psidSpecific = specific;
 }
 
 const VideoStandard SidFlags :: getClock() const {
   return clock;
 }
 
+void SidFlags :: setClock(VideoStandard standard) {
+  clock = standard;
+}
+
 const SIDVersion SidFlags :: getSidModel() const {
   return sidModel;
+}
+
+void SidFlags :: setSidModel(SIDVersion version) {
+  sidModel = version;
 }
 
 void SidFlags :: setDefaults() {

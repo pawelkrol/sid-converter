@@ -100,6 +100,10 @@ void SidFileTest :: testBuildDefault() {
 
 void SidFileTest :: testBuildFromFile() {
   // TODO: add missing implementation...
+  // TODO: NOW!!!
+  // 1. Create a new temporary SID file
+  // 2. Build a new SidFile object out of this created file
+  // 3. Compare it against a standard object that was used to create temporary SID file in the first step
   CPPUNIT_ASSERT(1 == 0);
 }
 

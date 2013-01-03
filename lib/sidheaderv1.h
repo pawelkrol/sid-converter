@@ -13,6 +13,7 @@ class SidHeaderV1 : public SidHeader {
 
   public:
     SidHeaderV1();
+    SidHeaderV1(const byte *bytes);
 
     ~SidHeaderV1();
 

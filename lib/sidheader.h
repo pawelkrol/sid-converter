@@ -62,10 +62,11 @@ class SidHeader {
 
     void showCommonDataDump() const;
 
+    void initCommon(const byte *bytes);
+
   public:
     SidHeader();
-
-    // virtual ~SidHeader() = 0;
+    SidHeader(const byte *bytes);
 
     virtual const byte *get() const = 0;
     const byte *getCommon() const;
@@ -120,6 +121,8 @@ class SidHeader {
     virtual void validate() const = 0;
 
     virtual void showDataDump() const = 0;
+
+    static const short int checkVersionNum(const byte *bytes);
 };
 
 #endif // SidHeader_h
