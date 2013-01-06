@@ -14,7 +14,7 @@ void SidFileUtilsTest :: testExists() {
 }
 
 void SidFileUtilsTest :: testRead() {
-  const int numBytes = 9;
+  const unsigned int numBytes = 9;
   const byte expectedData [numBytes] = { 0x00, 0x10, 0x4c, 0x06, 0x10, 0x4c, 0x06, 0x10, 0x60 };
   const char *filename = TestFileUtils::createRandomFile(expectedData, numBytes);
   unsigned long int filesize;

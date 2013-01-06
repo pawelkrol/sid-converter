@@ -39,7 +39,7 @@ void SidFileUtils :: write(const char *filename, const unsigned int filesize, co
     throw SidException("File open error");
   }
 
-  for (int n = 0; n < filesize; n++) {
+  for (unsigned int n = 0; n < filesize; n++) {
     fprintf(pFile, "%c", *(data + n));
   }
 

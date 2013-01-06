@@ -66,7 +66,7 @@ const char *SidString :: getString() const {
 }
 
 void SidString :: setString(const char *str) {
-  int i;
+  unsigned int i;
 
   for (i = 0; i < strlen(str) && i < MAX_SID_STRING_SIZE; i++) {
     byte val = *(str + i);

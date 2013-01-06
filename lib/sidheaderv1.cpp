@@ -19,11 +19,10 @@ SidHeaderV1 :: ~SidHeaderV1() {
 }
 
 SidHeaderV1& SidHeaderV1 :: operator=(const SidHeaderV1& sidHeader) {
-//throw SidException("\n## TODO: now ##\n");
   // TODO: implementation missing...
+  throw SidException("Implementation missing!");
   // TODO: currently assignment doesn't work, this will obviously not work if anything was changed in header
-  SidHeaderV1 header = SidHeaderV1();
-  return header;
+  return *this;
 }
 
 const byte *SidHeaderV1 :: get() const {

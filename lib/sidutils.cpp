@@ -17,7 +17,7 @@ void SidUtils :: intToHex(short int val, byte *hex, unsigned int numBytes) {
 const bool SidUtils :: compareData(const byte *dataA, const byte *dataB, const unsigned int size) {
   bool result = true;
 
-  for (int i = 0; i < size; i++) {
+  for (unsigned int i = 0; i < size; i++) {
     byte valueA = *(dataA + i);
     byte valueB = *(dataB + i);
 
@@ -56,7 +56,7 @@ const addr SidUtils :: twoBytesToAddr(const byte *loHi) {
   const byte lo = *(loHi + 0);
   const byte hi = *(loHi + 1);
 
-  addr memaddr = lo + hi << 8;
+  addr memaddr = lo + (hi << 8);
 
   return memaddr;
 }

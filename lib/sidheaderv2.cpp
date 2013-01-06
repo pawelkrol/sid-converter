@@ -32,8 +32,7 @@ SidHeaderV2& SidHeaderV2 :: operator=(const SidHeaderV2& sidHeader) {
   // TODO: implementation missing...
   throw SidException("Implementation missing!");
   // TODO: currently assignment doesn't work, this will obviously not work if anything was changed in header
-  SidHeaderV2 header = SidHeaderV2();
-  return header;
+  return *this;
 }
 
 SidHeaderV2 :: SidHeaderV2() {

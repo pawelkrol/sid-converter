@@ -11,7 +11,7 @@
     throw SidException("Insufficient memory"); \
   }                                            \
   strncpy(target, source, length);             \
-  *(target + length) = NULL;                   \
+  *(target + length) = 0;                      \
 }
 
 #define getSidHeaderValue(value,size)          \

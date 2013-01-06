@@ -37,9 +37,9 @@ const bool SidFile :: compare(const SidFile& a, const SidFile& b) {
   }
 }
 
-SidFile :: SidFile() : data(new SidData()), file(NULL), header(new SidHeaderV2()) {}
+SidFile :: SidFile() : file(NULL), data(new SidData()), header(new SidHeaderV2()) {}
 
-SidFile :: SidFile(const char *filename) : data(new SidData()), file(NULL), header(new SidHeaderV2()) {
+SidFile :: SidFile(const char *filename) : file(NULL), data(new SidData()), header(new SidHeaderV2()) {
   loadFile(filename);
 }
 
@@ -84,7 +84,21 @@ void SidFile :: cleanup() {
   }
 
   if (header != NULL) {
-    delete header;
+    switch (header->getVersionNum()) {
+      case 1: {
+        SidHeaderV1 *headerV1 = (SidHeaderV1 *)header;
+        delete headerV1;
+        break;
+      }
+      case 2: {
+        SidHeaderV2 *headerV2 = (SidHeaderV2 *)header;
+        delete headerV2;
+        break;
+      }
+      default: {
+        throw SidException("Invalid SID file version header");
+      }
+    }
     header = NULL;
   }
 }
@@ -99,6 +113,8 @@ SidFile& SidFile :: operator=(const SidFile& sidFile) {
 
   *(this->data) = *sidFile.data;
   *(this->header) = *sidFile.header;
+
+  return *this;
 }
 
 const char *SidFile :: getFile() const {

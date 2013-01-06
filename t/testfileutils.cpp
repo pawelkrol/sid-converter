@@ -30,7 +30,7 @@ const char *TestFileUtils :: createEmptySidFile(unsigned int &numBytes) {
   const unsigned int dataSize = 9;
   const byte data [dataSize] = { 0x00, 0x10, 0x4c, 0x06, 0x10, 0x4c, 0x06, 0x10, 0x60 };
 
-  SidHeader *sidHeader = new SidHeaderV2();
+  SidHeaderV2 *sidHeader = new SidHeaderV2();
   const short int headerSize = sidHeader->size();
 
   const unsigned int fileSize = dataSize + headerSize;

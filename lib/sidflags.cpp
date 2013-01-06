@@ -62,6 +62,8 @@ const BinaryDataFormat SidFlags :: getMusPlayer(const byte bits) const {
       return PLAYER_BUILT_IN_MUSIC_PLAYER;
     case 0x01:
       return PLAYER_COMPUTES_SIDPLAYER_MUS_DATA;
+    default:
+      return PLAYER_UNINITIALIZED;
   }
 }
 
@@ -71,6 +73,8 @@ const PlaySIDSpecific SidFlags :: getPsidSpecific(const byte bits) const {
       return PSID_C64_COMPATIBLE;
     case 0x02:
       return PSID_PLAYSID_SPECIFIC;
+    default:
+      return PSID_UNINITIALIZED;
   }
 }
 
@@ -84,6 +88,8 @@ const VideoStandard SidFlags :: getClock(const byte bits) const {
       return CLOCK_NTSC;
     case 0x0c:
       return CLOCK_PAL_AND_NTSC;
+    default:
+      return CLOCK_UNINITIALIZED;
   }
 }
 
@@ -97,6 +103,8 @@ const SIDVersion SidFlags :: getSidModel(const byte bits) const {
       return SID_MOS8580;
     case 0x30:
       return SID_MOS6581_AND_MOS8580;
+    default:
+      return SID_UNINITIALIZED;
   }
 }
 
@@ -106,7 +114,7 @@ const byte SidFlags :: getMusPlayerBits() const {
       return 0x00;
     case PLAYER_COMPUTES_SIDPLAYER_MUS_DATA:
       return 0x01;
-    case PLAYER_UNINITIALIZED:
+    default:
       throw SidException("Uninitialized SID header flag: \"musPlayer\" must specify binary data format!");
   }
 }
@@ -117,7 +125,7 @@ const byte SidFlags :: getPsidSpecificBits() const {
       return 0x00;
     case PSID_PLAYSID_SPECIFIC:
       return 0x02;
-    case PSID_UNINITIALIZED:
+    default:
       throw SidException("Uninitialized SID header flag: \"psidSpecific\" must specify PlaySID specific!");
   }
 }
@@ -132,7 +140,7 @@ const byte SidFlags :: getClockBits() const {
       return 0x08;
     case CLOCK_PAL_AND_NTSC:
       return 0x0c;
-    case CLOCK_UNINITIALIZED:
+    default:
       throw SidException("Uninitialized SID header flag: \"clock\" must specify video standard!");
   }
 }
@@ -147,7 +155,7 @@ const byte SidFlags :: getSidModelBits() const {
       return 0x20;
     case SID_MOS6581_AND_MOS8580:
       return 0x30;
-    case SID_UNINITIALIZED:
+    default:
       throw SidException("Uninitialized SID header flag: \"sidModel\" must specify SID version!");
   }
 }

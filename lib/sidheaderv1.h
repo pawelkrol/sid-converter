@@ -5,7 +5,7 @@
 
 #define HEADER_V1_SIZE HEADER_COMMON_SIZE
 
-class SidHeaderV1 : public SidHeader {
+class SidHeaderV1 final : public SidHeader {
 
   private:
     friend bool operator==(const SidHeaderV1& a, const SidHeaderV1& b);

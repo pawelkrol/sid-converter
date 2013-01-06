@@ -15,7 +15,7 @@
 #define PAGE_LENGTH_SIZE 0x01
 #define RESERVED_SIZE 0x02
 
-class SidHeaderV2 : public SidHeader {
+class SidHeaderV2 final : public SidHeader {
 
   private:
     SidFlags flags; // offset: 0x76

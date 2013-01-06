@@ -1,6 +1,6 @@
 include ../config
 
-CFLAGS=-Wall
+CFLAGS=-Wall -std=c++11
 
 SOURCES := memaddr.cpp siddata.cpp sidexception.cpp sidfile.cpp sidfileutils.cpp sidflags.cpp sidheader.cpp sidheaderv1.cpp sidheaderv2.cpp sidstring.cpp sidutils.cpp
 
